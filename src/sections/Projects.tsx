@@ -7,37 +7,37 @@ import { Dialog } from "@headlessui/react";
 
 const PROJECTS = [
     {
-        title: "E-Commerce Platform",
+        title: "Safe Space",
         description:
             "Full‑stack e‑commerce with auth, cart, payments, and admin dashboard.",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=800&fit=crop",
+        image: "health.jpg",
         tags: ["React", "Node.js", "MongoDB", "Stripe"],
         github: "#",
         demo: "#",
     },
     {
-        title: "Task Management App",
+        title: "Freelance Marketplace",
         description:
             "Collaborative tasks with real‑time updates for teams and productivity.",
-        image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&h=800&fit=crop",
+        image: "Freelance.jpg",
         tags: ["Next.js", "Socket.io", "PostgreSQL"],
         github: "#",
         demo: "#",
     },
     {
-        title: "Weather Dashboard",
+        title: "Reego Adventures",
         description:
             "Location‑based forecasts with charts and alerts.",
-        image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=1200&h=800&fit=crop",
+        image: "adventure.jpg",
         tags: ["React", "Chart.js", "Weather API"],
         github: "#",
         demo: "#",
     },
     {
-        title: "Social Media Platform",
+        title: "Appliance Magic",
         description:
             "Modern social platform with real‑time messaging and user interactions.",
-        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&h=800&fit=crop",
+        image: "appliance.jpg",
         tags: ["React", "Firebase", "Material-UI"],
         github: "#",
         demo: "#",
@@ -129,8 +129,9 @@ function ProjectCard({
             className="project-card cursor-pointer"
             initial={{ opacity: 0, y: 60, scale: 0.95 }}
             animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 60, scale: 0.95 }}
-            transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.5, delay: index * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }} // Faster animation
             whileHover={{ y: -10, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.25)", scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
             onClick={onOpenDetail}
         >
             <div className="flex flex-col h-full bg-gradient-to-br from-white/10 via-black/60 to-black/90 border border-white/10 rounded-2xl overflow-hidden shadow-lg transition-all duration-500">
