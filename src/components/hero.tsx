@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { type HeroProps } from "@/types"
 import Link from "next/link"
 
 const Hero = React.forwardRef<HTMLElement, HeroProps>(

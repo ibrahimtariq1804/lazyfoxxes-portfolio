@@ -2,8 +2,9 @@
 import { Container, SectionHeading, Squares } from "@/components";
 import { Github, ExternalLink, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
+import { type Project } from "@/types";
 
 const PROJECTS = [
     {
@@ -119,7 +120,7 @@ function ProjectCard({
     isVisible,
     onOpenDetail,
 }: {
-    project: any;
+    project: Project;
     index: number;
     isVisible: boolean;
     onOpenDetail: () => void;
@@ -197,7 +198,7 @@ function ProjectDetailCard({
     project,
     onClose,
 }: {
-    project: any;
+    project: Project;
     onClose: () => void;
 }) {
     const demoDetails: Record<string, string> = {
