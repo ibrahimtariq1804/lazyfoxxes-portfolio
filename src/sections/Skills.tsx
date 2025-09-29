@@ -1,5 +1,5 @@
 "use client";
-import { Container, SectionHeading, IconSlider } from "@/components";
+import { Container, SectionHeading, IconSlider, Squares } from "@/components";
 import { motion } from "framer-motion";
 
 const SKILLS_ICONS = [
@@ -19,27 +19,21 @@ const SKILLS_ICONS = [
 	{ name: "Python", icon: "🐍", category: "Backend" },
 	{ name: "Django", icon: "🎯", category: "Backend" },
 	{ name: "FastAPI", icon: "⚡", category: "Backend" },
-	{ name: "Go", icon: "🐹", category: "Backend" },
 	{ name: "Java", icon: "☕", category: "Backend" },
-	{ name: "Spring Boot", icon: "🌱", category: "Backend" },
 	
 	// Databases
 	{ name: "PostgreSQL", icon: "🐘", category: "Database" },
 	{ name: "MongoDB", icon: "🍃", category: "Database" },
 	{ name: "MySQL", icon: "🐬", category: "Database" },
-	{ name: "Redis", icon: "🔴", category: "Database" },
-	{ name: "Prisma", icon: "🔮", category: "Database" },
 	
 	// Mobile Development
 	{ name: "React Native", icon: "📱", category: "Mobile" },
 	{ name: "Flutter", icon: "🦋", category: "Mobile" },
-	{ name: "Swift", icon: "🦉", category: "Mobile" },
 	{ name: "Kotlin", icon: "🟣", category: "Mobile" },
 	
 	// Cloud & DevOps
 	{ name: "AWS", icon: "☁️", category: "Cloud" },
 	{ name: "Docker", icon: "🐳", category: "DevOps" },
-	{ name: "Kubernetes", icon: "⚓", category: "DevOps" },
 	{ name: "Vercel", icon: "▲", category: "Cloud" },
 	{ name: "Netlify", icon: "🌐", category: "Cloud" },
 	{ name: "GitHub Actions", icon: "⚙️", category: "DevOps" },
@@ -47,7 +41,6 @@ const SKILLS_ICONS = [
 	// Design & Tools
 	{ name: "Figma", icon: "🎨", category: "Design" },
 	{ name: "Adobe XD", icon: "🎭", category: "Design" },
-	{ name: "Sketch", icon: "✏️", category: "Design" },
 	{ name: "Git", icon: "📚", category: "Tools" },
 	{ name: "VS Code", icon: "💻", category: "Tools" },
 	{ name: "Webpack", icon: "📦", category: "Tools" },
@@ -70,7 +63,10 @@ const SKILLS_ICONS = [
 
 export function Skills() {
 	return (
-		<section id="skills" className="py-20 bg-black transition-colors duration-500">
+		<section id="skills" className="relative py-20 bg-black transition-colors duration-500 overflow-hidden">
+			<div className="absolute inset-0 -z-10 w-full h-full pointer-events-none">
+             <Squares direction="diagonal" speed={1} borderColor="#222" squareSize={40} hoverFillColor="#222" />
+            </div>
 			<Container>
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
@@ -94,3 +90,11 @@ export function Skills() {
 		</section>
 	);
 }
+
+// Inside IconSlider.tsx
+<motion.div
+  animate={{ x: [0, -1000] }}
+  transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+>
+  {/* ...icons... */}
+</motion.div>

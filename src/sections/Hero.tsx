@@ -33,9 +33,9 @@ export function Hero() {
 					initial={{ opacity: 0, y: 50 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
-					className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+					className="text-5xl md:text-7xl lg:text-8xl font-bold mb-7"
 				>
-					Hi, I’m <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Ibrahim</span>
+					 We’re <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Lazyfoxxes</span>
 				</motion.h1>
 				<motion.p
 					initial={{ opacity: 0, y: 30 }}
@@ -43,7 +43,7 @@ export function Hero() {
 					transition={{ duration: 0.8, delay: 0.2 }}
 					className="text-lg md:text-2xl text-foreground/70 mb-8"
 				>
-					Full‑stack developer crafting fast, accessible web experiences.
+					Redefining Productivity the Foxx Way.
 				</motion.p>
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}

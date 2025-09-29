@@ -12,7 +12,7 @@ const SERVICES = [
 		details: [
 			"Frontend: React, Next.js, TypeScript, Tailwind CSS",
 			"Backend: Node.js, Express",
-			"Database: PostgreSQL, MongoDB, Redis",
+			"Database: PostgreSQL, MongoDB, MySQL",
 			"Cloud: AWS, Vercel",
 			"Tooling: Git, Docker, CI/CD, Testing",
 		],
@@ -23,7 +23,7 @@ const SERVICES = [
 			"Native and cross‑platform apps using React Native. Smooth performance and intuitive UX across devices.",
 		icon: "📱",
 		details: [
-			"React Native",
+			"React Native , Flutter",
 			"State: Redux, Zustand",
 			"Backend: REST, GraphQL",
 			"Stores: App Store, Play Store",
@@ -47,7 +47,7 @@ const SERVICES = [
 		icon: "⚙️",
 		details: [
 			"Node.js, Python",
-			"PostgreSQL, MongoDB",
+			"PostgreSQL, MongoDB, FireBase",
 			"Docker, CI/CD",
 		],
 	},
@@ -84,7 +84,7 @@ export function Services() {
 					viewport={{ once: true }}
 					className="text-center py-12"
 				>
-					<SectionHeading title="My Services" subtitle="How I can help" />
+					<SectionHeading title="Our Services" subtitle="How I can help" />
 				</motion.div>
 
 				<div ref={containerRef} className="grid lg:grid-cols-2 gap-10 pb-10">

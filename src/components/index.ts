@@ -6,3 +6,4 @@ export * from "./Footer";
 export * from "./RootClient";
 export * from "./IconSlider";
 export { default as LightRays } from "./LightRays";
+export { default as Squares } from "./Squares";

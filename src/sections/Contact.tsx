@@ -16,7 +16,7 @@ export function Contact() {
 						<div className="space-y-5">
 							<div className="flex items-center gap-3"><Mail className="size-5 text-primary" /><span>john.doe@example.com</span></div>
 							<div className="flex items-center gap-3"><Phone className="size-5 text-primary" /><span>+1 (555) 123-4567</span></div>
-							<div className="flex items-center gap-3"><MapPin className="size-5 text-primary" /><span>San Francisco, CA</span></div>
+							<div className="flex items-center gap-3"><MapPin className="size-5 text-primary" /><span>Islamabad, Pakistan</span></div>
 						</div>
 						<div className="flex gap-4 mt-6">
 							<a href="#" className="p-3 border rounded-lg"><Github className="size-5" /></a>

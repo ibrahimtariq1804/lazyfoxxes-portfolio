@@ -1,4 +1,4 @@
-import { Home as HomeSection, Services, Skills, Projects, Contact } from "@/sections";
+import { Home as HomeSection, Services, Skills, Projects, Contact, About } from "@/sections";
 
 export default function Home() {
 	return (
@@ -6,6 +6,7 @@ export default function Home() {
 			<HomeSection />
 			<Services />
 			<Skills />
+			<About />
 			<Projects />
 			<Contact />
 		</>
