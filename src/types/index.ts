@@ -20,7 +20,9 @@ export interface HeroProps extends Omit<React.HTMLAttributes<HTMLElement>, 'titl
 // Project interface
 export interface Project {
   title: string
+  description: string
   image: string
   tags: string[]
-  description?: string
+  github: string
+  demo: string
 }
