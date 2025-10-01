@@ -6,11 +6,12 @@ const NAV_ITEMS = [
 	{ id: "home", label: "Home" },
 	{ id: "services", label: "Services" },
 	{ id: "skills", label: "Skills" },
+	{ id: "about", label: "About" },
 	{ id: "projects", label: "Projects" },
 	{ id: "contact", label: "Contact" },
 ];
 
-const NAVBAR_HEIGHT = 70; // Adjust if your navbar height is different
+const NAVBAR_HEIGHT = 64; // h-16 = 64px (16 * 4px)
 
 export function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);

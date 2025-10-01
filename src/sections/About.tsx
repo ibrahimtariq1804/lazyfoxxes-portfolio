@@ -29,7 +29,7 @@ const WHY_CHOOSE_US = [
 
 export function About() {
 	return (
-		<section className="relative py-20 bg-black overflow-hidden">
+		<section id="about" className="relative py-20 bg-black overflow-hidden">
 			<div className="absolute inset-0 -z-10 w-full h-full pointer-events-none">
 				<Squares
 					direction="diagonal"
