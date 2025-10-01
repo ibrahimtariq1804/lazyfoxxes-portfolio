@@ -1,6 +1,5 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown } from "lucide-react";
 import { LightRays } from "@/components";
 
 export function Hero() {
@@ -63,9 +62,6 @@ export function Hero() {
 					>
 						Get In Touch
 					</button>
-				</motion.div>
-				<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
-					<ChevronDown className="w-6 h-6 text-foreground/60 animate-bounce" />
 				</motion.div>
 			</motion.div>
 		</section>
