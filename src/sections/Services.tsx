@@ -56,9 +56,13 @@ const SERVICES = [
 export function Services() {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [active, setActive] = useState(0);
+	const isNavigatingRef = useRef(false);
 
 	useEffect(() => {
 		const onScroll = () => {
+			// Skip scroll handling during navigation
+			if (isNavigatingRef.current) return;
+			
 			const nodes = SERVICES.map((_, i) => document.getElementById(`service-detail-${i}`));
 			const y = window.scrollY;
 			const h = window.innerHeight;
@@ -70,8 +74,24 @@ export function Services() {
 				if (Math.abs(center - viewportCenter) < rect.height / 2) setActive(i);
 			});
 		};
+
+		const handleNavigationStart = () => {
+			isNavigatingRef.current = true;
+		};
+
+		const handleNavigationEnd = () => {
+			isNavigatingRef.current = false;
+		};
+
 		window.addEventListener("scroll", onScroll, { passive: true });
-		return () => window.removeEventListener("scroll", onScroll);
+		window.addEventListener("navigationScrollStart", handleNavigationStart);
+		window.addEventListener("navigationScrollEnd", handleNavigationEnd);
+		
+		return () => {
+			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("navigationScrollStart", handleNavigationStart);
+			window.removeEventListener("navigationScrollEnd", handleNavigationEnd);
+		};
 	}, []);
 
 	return (

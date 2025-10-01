@@ -37,9 +37,17 @@ export function Navigation() {
 	const scrollTo = (id: string) => {
 		const el = document.getElementById(id);
 		if (el) {
+			// Emit a custom event to signal navigation is happening
+			window.dispatchEvent(new CustomEvent('navigationScrollStart'));
+			
 			const y = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
 			window.scrollTo({ top: y, behavior: "smooth" });
 			setActive(id); // Update active immediately
+			
+			// Signal navigation is complete after scroll animation
+			setTimeout(() => {
+				window.dispatchEvent(new CustomEvent('navigationScrollEnd'));
+			}, 1000);
 		}
 		setIsOpen(false);
 	};
