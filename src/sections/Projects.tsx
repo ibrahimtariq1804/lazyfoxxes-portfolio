@@ -128,34 +128,67 @@ function ProjectCard({
     return (
         <motion.div
             className="project-card cursor-pointer"
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.95 }}
-            transition={{ duration: 0.4, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-            whileHover={{ y: -6, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.25)", scale: 1.02 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95, rotateX: -10 }}
+            animate={isVisible ? { opacity: 1, y: 0, scale: 1, rotateX: 0 } : { opacity: 0, y: 40, scale: 0.95, rotateX: -10 }}
+            transition={{ 
+                duration: 0.5, 
+                delay: index * 0.12, 
+                type: "spring",
+                stiffness: 100
+            }}
+            whileHover={{ 
+                scale: 1.05,
+                y: -8,
+                boxShadow: "0 20px 60px rgba(96, 165, 250, 0.2)"
+            }}
             whileTap={{ scale: 0.98 }}
             onClick={onOpenDetail}
         >
-            <div className="flex flex-col h-full bg-gradient-to-br from-white/10 via-black/60 to-black/90 border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-500">
-                <div className="relative">
+            <div className="flex flex-col h-full bg-gradient-to-br from-white/10 via-black/60 to-black/90 border border-white/10 hover:border-blue-400/40 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-500">
+                <motion.div 
+                    className="relative"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                    transition={{ delay: index * 0.12 + 0.2, duration: 0.4 }}
+                >
                     <img
                         src={project.image}
                         alt={project.title}
                         className="w-full h-48 sm:h-56 object-cover transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                </div>
+                </motion.div>
                 <div className="flex flex-col flex-1 justify-between p-4 sm:p-6">
                     <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{project.title}</h3>
-                        <p className="text-white/80 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">{project.description}</p>
+                        <motion.h3 
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                            transition={{ delay: index * 0.12 + 0.3, duration: 0.4 }}
+                            className="text-xl sm:text-2xl font-bold text-white mb-2"
+                        >
+                            {project.title}
+                        </motion.h3>
+                        <motion.p 
+                            initial={{ opacity: 0 }}
+                            animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+                            transition={{ delay: index * 0.12 + 0.4, duration: 0.4 }}
+                            className="text-white/80 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed"
+                        >
+                            {project.description}
+                        </motion.p>
                     </div>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                         {project.tags.map((tag: string, tagIndex: number) => (
                             <motion.span
                                 key={tagIndex}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                                transition={{ duration: 0.2, delay: tagIndex * 0.05 }}
+                                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                                animate={isVisible ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 10 }}
+                                transition={{ 
+                                    delay: index * 0.12 + 0.5 + (tagIndex * 0.05),
+                                    type: "spring",
+                                    stiffness: 200
+                                }}
+                                whileHover={{ scale: 1.1, y: -2 }}
                                 className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/10 border border-white/20 rounded-full text-xs text-white/80 hover:bg-white/20 transition-colors duration-200"
                             >
                                 {tag}
