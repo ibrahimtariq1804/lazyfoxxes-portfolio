@@ -37,17 +37,12 @@ export function Navigation() {
 	const scrollTo = (id: string) => {
 		const el = document.getElementById(id);
 		if (el) {
-			// Emit a custom event to signal navigation is happening
-			window.dispatchEvent(new CustomEvent('navigationScrollStart'));
-			
 			const y = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-			window.scrollTo({ top: y, behavior: "smooth" });
-			setActive(id); // Update active immediately
 			
-			// Signal navigation is complete after scroll animation
-			setTimeout(() => {
-				window.dispatchEvent(new CustomEvent('navigationScrollEnd'));
-			}, 1000);
+			// Use "auto" (instant) scroll to avoid getting trapped in tall sections
+			// This ensures we jump directly to the target without smooth scrolling through intermediate content
+			window.scrollTo({ top: y, behavior: "auto" });
+			setActive(id); // Update active immediately
 		}
 		setIsOpen(false);
 	};
