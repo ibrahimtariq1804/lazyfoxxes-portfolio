@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
 
 const NAV_ITEMS = [
 	{ id: "home", label: "Home" },
@@ -77,8 +76,32 @@ export function Navigation() {
 						</button>
 					))}
 				</div>
-				<button className="md:hidden text-white" onClick={() => setIsOpen((v) => !v)}>
-					{isOpen ? <X size={22} /> : <Menu size={22} />}
+				<button 
+					className="md:hidden text-white relative w-6 h-6 flex flex-col justify-center items-center"
+					onClick={() => setIsOpen((v) => !v)}
+					aria-label="Toggle menu"
+				>
+					<span className="sr-only">Toggle menu</span>
+					<div className="w-5 h-4 relative flex flex-col justify-between">
+						{/* Top line */}
+						<span
+							className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 ease-in-out ${
+								isOpen ? "rotate-45 translate-y-[7px]" : "rotate-0 translate-y-0"
+							}`}
+						/>
+						{/* Middle line */}
+						<span
+							className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 ease-in-out ${
+								isOpen ? "opacity-0 translate-x-3" : "opacity-100 translate-x-0"
+							}`}
+						/>
+						{/* Bottom line */}
+						<span
+							className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 ease-in-out ${
+								isOpen ? "-rotate-45 -translate-y-[7px]" : "rotate-0 translate-y-0"
+							}`}
+						/>
+					</div>
 				</button>
 			</div>
 			{isOpen ? (

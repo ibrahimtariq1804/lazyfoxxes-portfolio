@@ -2,7 +2,7 @@
 import { Container, SectionHeading, Squares } from "@/components";
 import { Github, ExternalLink, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { type Project } from "@/types";
 
@@ -55,22 +55,7 @@ const PROJECTS = [
 ];
 
 export function Projects() {
-    const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
     const [detailIndex, setDetailIndex] = useState<number | null>(null);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            document.querySelectorAll('.project-card').forEach((card, idx) => {
-                const rect = card.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) {
-                    setVisibleCards(prev => new Set([...prev, idx]));
-                }
-            });
-        };
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll();
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
 
     const handleOpenDetail = (index: number) => setDetailIndex(index);
     const handleCloseDetail = () => setDetailIndex(null);
@@ -96,7 +81,6 @@ export function Projects() {
                             key={index}
                             project={project}
                             index={index}
-                            isVisible={visibleCards.has(index)}
                             onOpenDetail={() => handleOpenDetail(index)}
                         />
                     ))}
@@ -117,19 +101,18 @@ export function Projects() {
 function ProjectCard({
     project,
     index,
-    isVisible,
     onOpenDetail,
 }: {
     project: Project;
     index: number;
-    isVisible: boolean;
     onOpenDetail: () => void;
 }) {
     return (
         <motion.div
             className="project-card cursor-pointer"
             initial={{ opacity: 0, y: 40, scale: 0.95, rotateX: -10 }}
-            animate={isVisible ? { opacity: 1, y: 0, scale: 1, rotateX: 0 } : { opacity: 0, y: 40, scale: 0.95, rotateX: -10 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+            viewport={{ once: false, margin: "-50px" }}
             transition={{ 
                 duration: 0.5, 
                 delay: index * 0.12, 
@@ -148,7 +131,8 @@ function ProjectCard({
                 <motion.div 
                     className="relative"
                     initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: false, margin: "-50px" }}
                     transition={{ delay: index * 0.12 + 0.2, duration: 0.4 }}
                 >
                     <img
@@ -162,7 +146,8 @@ function ProjectCard({
                     <div>
                         <motion.h3 
                             initial={{ opacity: 0, x: -20 }}
-                            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: false, margin: "-50px" }}
                             transition={{ delay: index * 0.12 + 0.3, duration: 0.4 }}
                             className="text-xl sm:text-2xl font-bold text-white mb-2"
                         >
@@ -170,7 +155,8 @@ function ProjectCard({
                         </motion.h3>
                         <motion.p 
                             initial={{ opacity: 0 }}
-                            animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: false, margin: "-50px" }}
                             transition={{ delay: index * 0.12 + 0.4, duration: 0.4 }}
                             className="text-white/80 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed"
                         >
@@ -182,7 +168,8 @@ function ProjectCard({
                             <motion.span
                                 key={tagIndex}
                                 initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                                animate={isVisible ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 10 }}
+                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                viewport={{ once: false, margin: "-50px" }}
                                 transition={{ 
                                     delay: index * 0.12 + 0.5 + (tagIndex * 0.05),
                                     type: "spring",
