@@ -63,7 +63,7 @@ const SKILLS_ICONS = [
 
 export function Skills() {
 	return (
-		<section id="skills" className="relative py-20 bg-black transition-colors duration-500 overflow-hidden">
+		<section id="skills" className="relative py-12 sm:py-16 md:py-20 bg-black transition-colors duration-500 overflow-hidden">
 			<div className="absolute inset-0 -z-10 w-full h-full pointer-events-none">
              <Squares direction="diagonal" speed={1} borderColor="#222" squareSize={40} hoverFillColor="#222" />
             </div>
@@ -73,7 +73,7 @@ export function Skills() {
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}
 					viewport={{ once: true }}
-					className="text-center mb-12"
+					className="text-center mb-8 sm:mb-12"
 				>
 					<SectionHeading title="Skills & Expertise" subtitle="Technologies and tools I work with" />
 				</motion.div>
@@ -83,6 +83,7 @@ export function Skills() {
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, delay: 0.2 }}
 					viewport={{ once: true }}
+					className="px-2 sm:px-0"
 				>
 					<IconSlider icons={SKILLS_ICONS} />
 				</motion.div>

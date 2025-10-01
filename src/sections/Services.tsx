@@ -75,19 +75,50 @@ export function Services() {
 	}, []);
 
 	return (
-		<section id="services" className="bg-black transition-colors duration-500">
+		<section id="services" className="bg-black transition-colors duration-500 py-12 sm:py-16 md:py-20">
 			<Container>
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}
 					viewport={{ once: true }}
-					className="text-center py-12"
+					className="text-center mb-8 sm:mb-12"
 				>
 					<SectionHeading title="Our Services" subtitle="How I can help" />
 				</motion.div>
 
-				<div ref={containerRef} className="grid lg:grid-cols-2 gap-10 pb-10">
+				{/* Mobile View: Simple cards with everything */}
+				<div className="lg:hidden space-y-6 pb-8">
+					{SERVICES.map((svc, i) => (
+						<motion.div
+							key={i}
+							initial={{ opacity: 0, y: 40 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: i * 0.1 }}
+							viewport={{ once: true, margin: "-50px" }}
+							className="backdrop-blur-sm border border-border rounded-xl p-5 hover:border-primary/40 transition-all"
+						>
+							<div className="flex items-center gap-3 mb-3">
+								<div className="text-3xl">{svc.icon}</div>
+								<h3 className="text-lg font-bold">{svc.title}</h3>
+							</div>
+							<p className="text-foreground/70 text-sm mb-4 leading-relaxed">{svc.description}</p>
+							<div className="space-y-2">
+								<h4 className="text-xs font-semibold text-primary/80 uppercase tracking-wide">Tech Stack</h4>
+								<div className="flex flex-wrap gap-2">
+									{svc.details.map((d, di) => (
+										<span key={di} className="text-xs px-2 py-1 rounded-md bg-primary/10 border border-primary/20 text-foreground/80">
+											{d}
+										</span>
+									))}
+								</div>
+							</div>
+						</motion.div>
+					))}
+				</div>
+
+				{/* Desktop View: Original two-column layout */}
+				<div ref={containerRef} className="hidden lg:grid lg:grid-cols-2 gap-10 pb-10">
 					<div className="lg:sticky lg:top-24 lg:self-start space-y-6">
 						{SERVICES.map((svc, i) => (
 							<motion.div

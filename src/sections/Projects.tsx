@@ -76,7 +76,7 @@ export function Projects() {
     const handleCloseDetail = () => setDetailIndex(null);
 
     return (
-        <section id="projects" className="relative py-20 bg-black transition-colors duration-500 overflow-hidden">
+        <section id="projects" className="relative py-12 sm:py-16 md:py-20 bg-black transition-colors duration-500 overflow-hidden">
             <div className="absolute inset-0 -z-10 w-full h-full pointer-events-none">
                 <Squares direction="diagonal" speed={1} borderColor="#222" squareSize={40} hoverFillColor="#222" />
             </div>
@@ -86,11 +86,11 @@ export function Projects() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-8 sm:mb-12 md:mb-16"
                 >
                     <SectionHeading title="Featured Projects" subtitle="Some recent work" />
                 </motion.div>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 md:gap-10 px-2">
                     {PROJECTS.map((project, index) => (
                         <ProjectCard
                             key={index}
@@ -128,35 +128,35 @@ function ProjectCard({
     return (
         <motion.div
             className="project-card cursor-pointer"
-            initial={{ opacity: 0, y: 60, scale: 0.95 }}
-            animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 60, scale: 0.95 }}
-            transition={{ duration: 0.5, delay: index * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }} // Faster animation
-            whileHover={{ y: -10, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.25)", scale: 1.03 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.95 }}
+            transition={{ duration: 0.4, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+            whileHover={{ y: -6, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.25)", scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={onOpenDetail}
         >
-            <div className="flex flex-col h-full bg-gradient-to-br from-white/10 via-black/60 to-black/90 border border-white/10 rounded-2xl overflow-hidden shadow-lg transition-all duration-500">
+            <div className="flex flex-col h-full bg-gradient-to-br from-white/10 via-black/60 to-black/90 border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-500">
                 <div className="relative">
                     <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-56 object-cover transition-transform duration-700"
+                        className="w-full h-48 sm:h-56 object-cover transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 </div>
-                <div className="flex flex-col flex-1 justify-between p-6">
+                <div className="flex flex-col flex-1 justify-between p-4 sm:p-6">
                     <div>
-                        <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-                        <p className="text-white/80 text-sm mb-4">{project.description}</p>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{project.title}</h3>
+                        <p className="text-white/80 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">{project.description}</p>
                     </div>
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                         {project.tags.map((tag: string, tagIndex: number) => (
                             <motion.span
                                 key={tagIndex}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                                 transition={{ duration: 0.2, delay: tagIndex * 0.05 }}
-                                className="px-3 py-1 bg-white/10 border border-white/20 rounded-full text-xs text-white/80 hover:bg-white/20 transition-colors duration-200"
+                                className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/10 border border-white/20 rounded-full text-xs text-white/80 hover:bg-white/20 transition-colors duration-200"
                             >
                                 {tag}
                             </motion.span>
