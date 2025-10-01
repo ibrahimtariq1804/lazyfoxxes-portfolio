@@ -34,7 +34,12 @@ export function Hero() {
 					transition={{ duration: 0.8 }}
 					className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-7 leading-tight"
 				>
-					 We&apos;re <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Lazyfoxxes</span>
+					 We&apos;re <span className="relative inline-block">
+						<span className="relative z-10 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
+							Lazyfoxxes
+						</span>
+						<span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 blur-xl opacity-50 animate-pulse"></span>
+					</span>
 				</motion.h1>
 				<motion.p
 					initial={{ opacity: 0, y: 30 }}
@@ -48,7 +53,7 @@ export function Hero() {
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, delay: 0.4 }}
-					className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
+					className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center px-4 sm:px-0"
 				>
 					<button
 						onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}

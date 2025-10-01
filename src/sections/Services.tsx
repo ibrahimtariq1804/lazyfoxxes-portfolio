@@ -92,24 +92,74 @@ export function Services() {
 					{SERVICES.map((svc, i) => (
 						<motion.div
 							key={i}
-							initial={{ opacity: 0, y: 40 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: i * 0.1 }}
+							initial={{ opacity: 0, y: 40, scale: 0.95 }}
+							whileInView={{ opacity: 1, y: 0, scale: 1 }}
+							transition={{ 
+								duration: 0.5, 
+								delay: i * 0.15,
+								type: "spring",
+								stiffness: 100
+							}}
 							viewport={{ once: true, margin: "-50px" }}
-							className="backdrop-blur-sm border border-border rounded-xl p-5 hover:border-primary/40 transition-all"
+							whileHover={{ 
+								scale: 1.02,
+								borderColor: "rgba(96, 165, 250, 0.4)",
+								boxShadow: "0 10px 40px rgba(96, 165, 250, 0.15)"
+							}}
+							whileTap={{ scale: 0.98 }}
+							className="backdrop-blur-sm border border-border rounded-xl p-5 transition-all cursor-pointer"
 						>
 							<div className="flex items-center gap-3 mb-3">
-								<div className="text-3xl">{svc.icon}</div>
-								<h3 className="text-lg font-bold">{svc.title}</h3>
+								<motion.div 
+									initial={{ scale: 0, rotate: -180 }}
+									whileInView={{ scale: 1, rotate: 0 }}
+									transition={{ delay: i * 0.15 + 0.2, type: "spring", stiffness: 200 }}
+									className="text-3xl"
+								>
+									{svc.icon}
+								</motion.div>
+								<motion.h3 
+									initial={{ opacity: 0, x: -20 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									transition={{ delay: i * 0.15 + 0.3 }}
+									className="text-lg font-bold"
+								>
+									{svc.title}
+								</motion.h3>
 							</div>
-							<p className="text-foreground/70 text-sm mb-4 leading-relaxed">{svc.description}</p>
+							<motion.p 
+								initial={{ opacity: 0 }}
+								whileInView={{ opacity: 1 }}
+								transition={{ delay: i * 0.15 + 0.4 }}
+								className="text-foreground/70 text-sm mb-4 leading-relaxed"
+							>
+								{svc.description}
+							</motion.p>
 							<div className="space-y-2">
-								<h4 className="text-xs font-semibold text-primary/80 uppercase tracking-wide">Tech Stack</h4>
+								<motion.h4 
+									initial={{ opacity: 0, x: -10 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									transition={{ delay: i * 0.15 + 0.5 }}
+									className="text-xs font-semibold text-primary/80 uppercase tracking-wide"
+								>
+									Tech Stack
+								</motion.h4>
 								<div className="flex flex-wrap gap-2">
 									{svc.details.map((d, di) => (
-										<span key={di} className="text-xs px-2 py-1 rounded-md bg-primary/10 border border-primary/20 text-foreground/80">
+										<motion.span 
+											key={di} 
+											initial={{ opacity: 0, scale: 0.8, y: 10 }}
+											whileInView={{ opacity: 1, scale: 1, y: 0 }}
+											transition={{ 
+												delay: i * 0.15 + 0.6 + (di * 0.05),
+												type: "spring",
+												stiffness: 200
+											}}
+											whileHover={{ scale: 1.1, y: -2 }}
+											className="text-xs px-2 py-1 rounded-md bg-primary/10 border border-primary/20 text-foreground/80 hover:bg-primary/20 hover:border-primary/40 transition-colors"
+										>
 											{d}
-										</span>
+										</motion.span>
 									))}
 								</div>
 							</div>
