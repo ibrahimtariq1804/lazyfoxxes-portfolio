@@ -75,7 +75,7 @@ export function Skills() {
 					viewport={{ once: true }}
 					className="text-center mb-8 sm:mb-12"
 				>
-					<SectionHeading title="Skills & Expertise" subtitle="Technologies and tools I work with" />
+					<SectionHeading title="Skills & Expertise" subtitle="Technologies and tools we master" />
 				</motion.div>
 				
 				<motion.div

@@ -59,7 +59,7 @@ export function Hero() {
 						onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
 						className="px-6 sm:px-8 py-3 bg-primary hover:opacity-90 text-primary-foreground rounded-lg font-medium transition-colors text-sm sm:text-base"
 					>
-						View My Work
+						View Our Work
 					</button>
 					<button
 						onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}

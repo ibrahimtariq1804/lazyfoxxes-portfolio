@@ -7,48 +7,53 @@ const SERVICES = [
 	{
 		title: "Web Development",
 		description:
-			"Building responsive and modern web applications using React, Next.js, and TypeScript. Fast, scalable, SEO‑friendly.",
+			"We create high-performance, scalable web applications using cutting-edge technologies. From simple landing pages to complex enterprise solutions, we deliver responsive, SEO-optimized websites that provide exceptional user experiences and drive business growth.",
 		icon: "🌐",
 		details: [
-			"Frontend: React, Next.js, TypeScript, Tailwind CSS",
-			"Backend: Node.js, Express",
-			"Database: PostgreSQL, MongoDB, MySQL",
-			"Cloud: AWS, Vercel",
-			"Tooling: Git, Docker, CI/CD, Testing",
+			"Frontend: React, Next.js, TypeScript, Tailwind CSS, Framer Motion",
+			"Backend: Node.js, Express, RESTful APIs, GraphQL",
+			"Database: PostgreSQL, MongoDB, MySQL, Redis",
+			"Cloud & Hosting: AWS, Vercel, Netlify, Azure",
+			"DevOps: Docker, CI/CD, GitHub Actions, Testing (Jest, Cypress)",
 		],
 	},
 	{
 		title: "Mobile Development",
 		description:
-			"Native and cross‑platform apps using React Native. Smooth performance and intuitive UX across devices.",
+			"We build native and cross-platform mobile applications that deliver seamless experiences across iOS and Android. Our mobile solutions combine beautiful design with robust functionality, ensuring your app performs flawlessly on any device.",
 		icon: "📱",
 		details: [
-			"React Native , Flutter",
-			"State: Redux, Zustand",
-			"Backend: REST, GraphQL",
-			"Stores: App Store, Play Store",
+			"Frameworks: React Native, Flutter, Kotlin",
+			"State Management: Redux, Zustand, Context API",
+			"Backend Integration: REST APIs, GraphQL, Firebase",
+			"Publishing: App Store & Google Play Store deployment",
+			"Features: Push notifications, offline mode, real-time sync",
 		],
 	},
 	{
 		title: "UI/UX Design",
 		description:
-			"Beautiful and intuitive interfaces. Wireframes, prototypes, and design systems that convert.",
+			"We craft beautiful, intuitive interfaces that users love. Our design process focuses on understanding your users' needs and creating experiences that are not only visually stunning but also highly functional and accessible to everyone.",
 		icon: "🎨",
 		details: [
-			"Figma, Design Systems",
-			"User research and testing",
-			"Accessibility (WCAG)",
+			"Design Tools: Figma, Adobe XD, Sketch",
+			"Design Systems & Component Libraries",
+			"User Research, Personas & User Flows",
+			"Wireframing & Interactive Prototyping",
+			"Accessibility Standards (WCAG 2.1 AA)",
 		],
 	},
 	{
 		title: "Backend Development",
 		description:
-			"Scalable APIs and services with robust security and performance.",
+			"We architect and build robust, scalable backend systems that power your applications. From API development to database design and cloud infrastructure, we ensure your backend is secure, performant, and ready to scale with your business.",
 		icon: "⚙️",
 		details: [
-			"Node.js, Python",
-			"PostgreSQL, MongoDB, FireBase",
-			"Docker, CI/CD",
+			"Languages: Node.js, Python, Java",
+			"Databases: PostgreSQL, MongoDB, MySQL, Firebase",
+			"API Development: REST, GraphQL, WebSocket",
+			"Cloud Services: AWS, Google Cloud, Azure",
+			"DevOps: Docker, Kubernetes, CI/CD pipelines",
 		],
 	},
 ];
@@ -84,7 +89,7 @@ export function Services() {
 					viewport={{ once: true }}
 					className="text-center mb-8 sm:mb-12"
 				>
-					<SectionHeading title="Our Services" subtitle="How I can help" />
+					<SectionHeading title="Our Services" subtitle="How we can help you succeed" />
 				</motion.div>
 
 				{/* Mobile View: Simple cards with everything */}

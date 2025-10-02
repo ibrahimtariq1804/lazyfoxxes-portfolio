@@ -47,7 +47,7 @@ export function About() {
 					viewport={{ once: true }}
 					className="text-center mb-8 sm:mb-12"
 				>
-					<SectionHeading title="About" subtitle="Who I am and what I do" />
+					<SectionHeading title="About" subtitle="Who we are and what we do" />
 				</motion.div>
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
@@ -57,10 +57,10 @@ export function About() {
 					className="max-w-2xl mx-auto mb-8 sm:mb-10 px-4"
 				>
 					<p className="text-white/80 text-base sm:text-lg text-center leading-relaxed">
-						I build modern web apps with Next.js, TypeScript, and Tailwind CSS.
+						We are a team of three passionate developers who build modern, scalable web and mobile applications. 
 						<br className="hidden sm:block" />
 						<span className="sm:hidden"> </span>
-						I care about clean code, performance, and delightful UX.
+						With expertise in Next.js, TypeScript, React Native, and cloud technologies, we deliver high-quality solutions that combine clean code, exceptional performance, and delightful user experiences.
 					</p>
 				</motion.div>
 				<motion.div
