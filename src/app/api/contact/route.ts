@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
 	try {
@@ -14,19 +16,10 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
-	// Create Gmail transporter
-	const transporter = nodemailer.createTransport({
-		service: 'gmail',
-		auth: {
-			user: 'lazyfoxxes@gmail.com',
-			pass: process.env.GMAIL_APP_PASSWORD,
-		},
-	});
-
-	// Send email
-	await transporter.sendMail({
-		from: `"Portfolio Contact Form" <lazyfoxxes@gmail.com>`,
-		to: 'lazyfoxxes@gmail.com',
+	// Send email using Resend
+	const { data, error } = await resend.emails.send({
+		from: 'Portfolio Contact Form <onboarding@resend.dev>',
+		to: ['ibrahimtariq1804@gmail.com'],
 		replyTo: email,
 		subject: `Portfolio Contact: ${subject}`,
 		html: `
@@ -36,11 +29,21 @@ export async function POST(req: NextRequest) {
 			<p><strong>Subject:</strong> ${subject}</p>
 			<p><strong>Message:</strong></p>
 			<p>${message.replace(/\n/g, '<br>')}</p>
+			<hr>
+			<p style="color: #666; font-size: 12px;">This email will be automatically forwarded to lazyfoxxes@gmail.com</p>
 		`,
 	});
 
+	if (error) {
+		console.error('Resend error:', error);
+		return NextResponse.json(
+			{ error: 'Failed to send email' },
+			{ status: 500 }
+		);
+	}
+
 	return NextResponse.json(
-		{ message: 'Email sent successfully' },
+		{ message: 'Email sent successfully', data },
 		{ status: 200 }
 	);
 	} catch (error) {
