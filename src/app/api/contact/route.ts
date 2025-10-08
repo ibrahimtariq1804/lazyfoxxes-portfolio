@@ -16,12 +16,12 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
-		// Send email using Resend
-		const { data, error } = await resend.emails.send({
-			from: 'Portfolio Contact Form <onboarding@resend.dev>',
-			to: ['lazyfoxxes@gmail.com'],
-			replyTo: email,
-			subject: `Portfolio Contact: ${subject}`,
+	// Send email using Resend
+	const { data, error } = await resend.emails.send({
+		from: 'Portfolio Contact Form <onboarding@resend.dev>',
+		to: ['ibrahimtariq1804@gmail.com'],
+		replyTo: email,
+		subject: `Portfolio Contact: ${subject}`,
 			html: `
 				<h2>New Contact Form Submission</h2>
 				<p><strong>Name:</strong> ${name}</p>
