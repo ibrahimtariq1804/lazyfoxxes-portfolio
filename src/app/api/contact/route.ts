@@ -14,6 +14,10 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
+	// Debug: Check if environment variable is loaded
+	console.log('GMAIL_APP_PASSWORD exists:', !!process.env.GMAIL_APP_PASSWORD);
+	console.log('GMAIL_APP_PASSWORD length:', process.env.GMAIL_APP_PASSWORD?.length);
+
 	// Create Gmail transporter for lazyfoxxes@gmail.com
 	const transporter = nodemailer.createTransport({
 		service: 'gmail',
