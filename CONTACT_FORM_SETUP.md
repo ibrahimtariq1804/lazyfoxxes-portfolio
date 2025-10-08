@@ -1,53 +1,55 @@
 # Contact Form Email Integration Setup Guide
 
 ## Overview
-Your contact form is now integrated with your email (lazyfoxxes@gmail.com) using Resend email service.
+Your contact form is now integrated with Gmail SMTP to send emails to **lazyfoxxes@gmail.com**.
 
 ## Setup Instructions
 
-### 1. Get Your Resend API Key
+### 1. Generate Gmail App Password
 
-1. Go to [Resend](https://resend.com) and create a free account
-2. Navigate to [API Keys](https://resend.com/api-keys) in your dashboard
-3. Click "Create API Key"
-4. Give it a name (e.g., "Portfolio Contact Form")
-5. Copy the API key (it starts with `re_`)
+Since you're using Gmail SMTP, you need to create an "App Password" for secure authentication:
+
+1. Go to your Google Account: https://myaccount.google.com/
+2. Click on **"Security"** in the left sidebar
+3. Under "How you sign in to Google", enable **2-Step Verification** (if not already enabled)
+4. After 2FA is enabled, go back to Security
+5. Under "How you sign in to Google", click on **"App passwords"** or visit: https://myaccount.google.com/apppasswords
+6. Click **"Select app"** → Choose "Mail"
+7. Click **"Select device"** → Choose "Other" and type "Portfolio Website"
+8. Click **"Generate"**
+9. **Copy the 16-character password** (it looks like: `abcd efgh ijkl mnop`)
 
 ### 2. Configure Environment Variables
 
-1. Create a `.env.local` file in the root of your project
-2. Add the following line:
-   ```
-   RESEND_API_KEY=re_your_actual_api_key_here
-   ```
-3. Replace `re_your_actual_api_key_here` with your actual Resend API key
+Your `.env.local` file should already exist. Update it with your Gmail App Password:
 
-### 3. Verify Domain (Optional but Recommended)
+```
+GMAIL_USER=ibrahimtariq1804@gmail.com
+GMAIL_APP_PASSWORD=your_16_character_app_password
+```
 
-For production use, you should verify your domain with Resend:
+Replace `your_16_character_app_password` with the password you just generated (remove spaces).
 
-1. In your Resend dashboard, go to [Domains](https://resend.com/domains)
-2. Click "Add Domain"
-3. Follow the instructions to add DNS records
-4. Once verified, update the API route (`src/app/api/contact/route.ts`) to use your domain:
-   ```typescript
-   from: 'Portfolio Contact Form <contact@yourdomain.com>',
-   ```
+### 3. Restart Development Server
+
+After updating the environment variables:
+1. Stop your current dev server (Ctrl+C)
+2. Start it again: `npm run dev`
 
 ### 4. Test the Form
 
-1. Start your development server: `npm run dev`
-2. Navigate to your contact section
-3. Fill out and submit the form
-4. Check your email at lazyfoxxes@gmail.com
+1. Navigate to your contact section
+2. Fill out and submit the form
+3. Check the email at **lazyfoxxes@gmail.com**
 
 ## How It Works
 
 1. **User fills the form** → Name, Email, Subject, Message
 2. **Form submits** → Data is sent to `/api/contact` endpoint
-3. **API processes** → Validates data and sends email via Resend
-4. **Email delivered** → You receive the message at lazyfoxxes@gmail.com
-5. **User feedback** → Success or error message is displayed
+3. **API processes** → Validates data and sends email via Gmail SMTP
+4. **Email delivered** → Message is sent to **lazyfoxxes@gmail.com**
+5. **Reply-to set** → The sender's email is set as reply-to for easy responses
+6. **User feedback** → Success or error message is displayed
 
 ## Features Implemented
 
@@ -58,34 +60,49 @@ For production use, you should verify your domain with Resend:
 ✅ Form reset after successful submission
 ✅ Disabled submit button during submission
 ✅ Reply-to field set to sender's email
+✅ Emails sent to **lazyfoxxes@gmail.com**
 
-## Free Tier Limits
+## Security Notes
 
-Resend's free tier includes:
-- 3,000 emails per month
-- 100 emails per day
-- Perfect for portfolio contact forms!
+- **Never commit** your `.env.local` file (it's already in .gitignore)
+- **App Passwords** are safer than using your actual Gmail password
+- If you suspect your App Password is compromised, revoke it and generate a new one
 
 ## Troubleshooting
 
 ### Email not sending?
-- Check that your `.env.local` file exists with the correct API key
-- Restart your development server after adding environment variables
+- Check that your `.env.local` file has the correct Gmail credentials
+- Make sure you used an **App Password** (not your regular Gmail password)
+- Ensure 2-Step Verification is enabled on your Google account
+- Restart your development server after changing environment variables
 - Check the browser console and terminal for error messages
 
-### Using Gmail instead?
-If you prefer to use Gmail SMTP instead of Resend, you can switch to Nodemailer. Let me know if you need help with that!
+### "Invalid login" error?
+- Make sure you're using an App Password, not your regular password
+- Check that the App Password doesn't have spaces
+- Verify the email address is correct
+
+### Still not working?
+- Try generating a new App Password
+- Make sure the Gmail account (ibrahimtariq1804@gmail.com) has 2FA enabled
+- Check your Google Account security settings
 
 ## Production Deployment
 
 When deploying to Vercel/Netlify/other platforms:
-1. Add `RESEND_API_KEY` to your environment variables in the platform settings
-2. Don't commit your `.env.local` file (it's already in .gitignore)
-3. Consider verifying your domain for better email deliverability
+1. Add `GMAIL_USER` and `GMAIL_APP_PASSWORD` to your environment variables in the platform settings
+2. **Don't commit** your `.env.local` file
+3. Test the form after deployment to ensure it works in production
+
+## Why Gmail SMTP Instead of Resend?
+
+Gmail SMTP allows you to:
+- Send emails to ANY email address (including lazyfoxxes@gmail.com)
+- No domain verification required
+- Free and reliable
+- Easy to set up with App Passwords
 
 ## Support
 
-For issues with Resend, visit: https://resend.com/docs
+For Gmail App Password issues: https://support.google.com/accounts/answer/185833
 For form issues, check the API route at: `src/app/api/contact/route.ts`
-
-
