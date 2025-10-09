@@ -70,13 +70,13 @@ export function Navigation() {
 					<div 
 						className="absolute rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 transition-all duration-500 ease-out"
 						style={{
-							width: '100px',
-							height: '40px',
-							left: `${NAV_ITEMS.findIndex(item => item.id === active) * 100 + NAV_ITEMS.findIndex(item => item.id === active) * 8}px`,
+							width: '80px',
+							height: '32px',
+							left: `${NAV_ITEMS.findIndex(item => item.id === active) * 88 + 4}px`,
 							top: '50%',
 							transform: 'translateY(-50%)',
-							filter: 'blur(8px)',
-							opacity: 0.4,
+							filter: 'blur(6px)',
+							opacity: 0.8,
 						}}
 					/>
 					
