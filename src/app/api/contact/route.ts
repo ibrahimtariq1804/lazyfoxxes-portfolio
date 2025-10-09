@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from 'nodemailer';
 
 export async function POST(req: NextRequest) {
 	try {
@@ -16,10 +14,19 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
-	// Send email using Resend (more reliable on Vercel) - Updated
-	const { data, error } = await resend.emails.send({
-		from: 'Portfolio Contact Form <onboarding@resend.dev>',
-		to: ['lazyfoxxes@gmail.com'],
+	// Create Gmail transporter for lazyfoxxes@gmail.com
+	const transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			user: 'lazyfoxxes@gmail.com',
+			pass: process.env.GMAIL_APP_PASSWORD,
+		},
+	});
+
+	// Send email directly to lazyfoxxes@gmail.com
+	await transporter.sendMail({
+		from: `"Portfolio Contact Form" <lazyfoxxes@gmail.com>`,
+		to: 'lazyfoxxes@gmail.com',
 		replyTo: email,
 		subject: `Portfolio Contact: ${subject}`,
 		html: `
@@ -32,16 +39,8 @@ export async function POST(req: NextRequest) {
 		`,
 	});
 
-	if (error) {
-		console.error('Resend error:', error);
-		return NextResponse.json(
-			{ error: 'Failed to send email' },
-			{ status: 500 }
-		);
-	}
-
 	return NextResponse.json(
-		{ message: 'Email sent successfully', data },
+		{ message: 'Email sent successfully' },
 		{ status: 200 }
 	);
 	} catch (error) {
