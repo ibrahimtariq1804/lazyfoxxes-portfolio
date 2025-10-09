@@ -71,13 +71,13 @@ export function Contact() {
 					<SectionHeading title="Get In Touch" subtitle="Let's build something great together" />
 				</motion.div>
 				{/* Force deployment - Contact layout updated */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 px-2">
+				<div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 px-2">
 					<motion.form 
 						initial={{ opacity: 0, y: 30 }} 
 						whileInView={{ opacity: 1, y: 0 }} 
 						transition={{ duration: 0.5, delay: 0.1 }} 
 						viewport={{ once: true, margin: "-50px" }} 
-						className="space-y-3 sm:space-y-4 order-1 lg:order-2"
+						className="space-y-3 sm:space-y-4 lg:order-2"
 						onSubmit={handleSubmit}
 					>
 						<input 
@@ -150,7 +150,7 @@ export function Contact() {
 						whileInView={{ opacity: 1, y: 0 }} 
 						transition={{ duration: 0.5 }} 
 						viewport={{ once: true, margin: "-50px" }}
-						className="order-2 lg:order-1"
+						className="lg:order-1"
 					>
 						<h3 className="text-lg sm:text-xl font-semibold mb-5 sm:mb-6">Ready to collaborate? Let&apos;s connect!</h3>
 						<p className="text-white/70 text-sm sm:text-base mb-6 leading-relaxed">
