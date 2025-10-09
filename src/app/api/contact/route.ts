@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 		}
 
 		// Create Gmail transporter for lazyfoxxes@gmail.com
-		const transporter = nodemailer.createTransporter({
+		const transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
 				user: 'lazyfoxxes@gmail.com',
