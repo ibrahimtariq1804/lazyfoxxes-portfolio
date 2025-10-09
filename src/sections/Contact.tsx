@@ -72,14 +72,14 @@ export function Contact() {
 				</motion.div>
 				{/* Force deployment - Contact layout updated */}
 				{/* Mobile: Form first, Details second | Desktop: Details left, Form right */}
-				<div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 px-2">
-					{/* FORM - Always first on mobile, second on desktop */}
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 px-2">
+					{/* FORM - First on mobile, second on desktop */}
 					<motion.form 
 						initial={{ opacity: 0, y: 30 }} 
 						whileInView={{ opacity: 1, y: 0 }} 
 						transition={{ duration: 0.5, delay: 0.1 }} 
 						viewport={{ once: true, margin: "-50px" }} 
-						className="space-y-3 sm:space-y-4 lg:order-2"
+						className="space-y-3 sm:space-y-4 order-1 lg:order-2"
 						onSubmit={handleSubmit}
 					>
 						<input 
@@ -147,13 +147,13 @@ export function Contact() {
 						</button>
 					</motion.form>
 
-					{/* DETAILS - Always second on mobile, first on desktop */}
+					{/* DETAILS - Second on mobile, first on desktop */}
 					<motion.div 
 						initial={{ opacity: 0, y: 30 }} 
 						whileInView={{ opacity: 1, y: 0 }} 
 						transition={{ duration: 0.5 }} 
 						viewport={{ once: true, margin: "-50px" }}
-						className="lg:order-1"
+						className="order-2 lg:order-1"
 					>
 						<h3 className="text-lg sm:text-xl font-semibold mb-5 sm:mb-6">Ready to collaborate? Let&apos;s connect!</h3>
 						<p className="text-white/70 text-sm sm:text-base mb-6 leading-relaxed">
