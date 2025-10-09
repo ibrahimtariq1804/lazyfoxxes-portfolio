@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
 	{ id: "home", label: "Home" },
@@ -10,13 +10,11 @@ const NAV_ITEMS = [
 	{ id: "contact", label: "Contact" },
 ];
 
-const NAVBAR_HEIGHT = 64; // h-16 = 64px (16 * 4px)
+const NAVBAR_HEIGHT = 80; // h-20 = 80px
 
 export function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [active, setActive] = useState("home");
-	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-	const navRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -39,74 +37,61 @@ export function Navigation() {
 		const el = document.getElementById(id);
 		if (el) {
 			const y = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-			
-			// Use "auto" (instant) scroll to avoid getting trapped in tall sections
-			// This ensures we jump directly to the target without smooth scrolling through intermediate content
-			window.scrollTo({ top: y, behavior: "auto" });
-			setActive(id); // Update active immediately
+			window.scrollTo({ top: y, behavior: "smooth" });
+			setActive(id);
 		}
 		setIsOpen(false);
 	};
 
 	return (
-		<nav className="fixed top-0 inset-x-0 z-50 bg-black/80 backdrop-blur supports-[backdrop-filter]:bg-black/60 border-b border-white/10">
-			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+		<nav className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200/50">
+			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+				{/* Logo */}
 				<div className="flex items-center gap-3">
 					<img
-						src="/logo.png" // Place your image in public/fox-logo.png
+						src="/logo.png"
 						alt="LazyFoxxes Logo"
-						className="h-13 w-13 object-contain" // Adjust size to match text
-						style={{ minWidth: "2.5rem", minHeight: "2.5rem" }}
+						className="h-10 w-10 object-contain"
 					/>
-					<div
-                        className="text-3xl font-bold text-white italic"
-                        style={{ fontFamily: '"VAG Rounded", Arial, sans-serif', fontWeight: 700 }}
-                    >
-                        lazyfoxxes
-                    </div>
+					<div className="text-2xl font-bold text-gray-900">
+						LazyFoxxes
+					</div>
 				</div>
-				<div className="hidden md:flex gap-2 relative" ref={navRef}>
-					{/* Sliding glow effect */}
-					<div 
-						className="absolute rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 transition-all duration-500 ease-out"
-						style={{
-							width: '80px',
-							height: '32px',
-							left: `${NAV_ITEMS.findIndex(item => item.id === active) * 88 + 4}px`,
-							top: '50%',
-							transform: 'translateY(-50%)',
-							filter: 'blur(6px)',
-							opacity: 0.8,
-						}}
-					/>
-					
-					{NAV_ITEMS.map((item, index) => (
+
+				{/* Desktop Navigation */}
+				<div className="hidden md:flex items-center gap-8">
+					{NAV_ITEMS.map((item) => (
 						<button
 							key={item.id}
 							onClick={() => scrollTo(item.id)}
-							onMouseEnter={() => setHoveredIndex(index)}
-							onMouseLeave={() => setHoveredIndex(null)}
-							className={`relative px-6 py-2 text-sm font-medium transition-all duration-300 ease-out group ${
+							className={`relative text-sm font-medium transition-all duration-300 ease-out group ${
 								active === item.id 
-									? "text-white" 
-									: "text-white/70 hover:text-white"
+									? "text-blue-600" 
+									: "text-gray-700 hover:text-blue-600"
 							}`}
 						>
-							<span className="relative z-10">{item.label}</span>
-							
-							{/* Individual button background */}
-							<div className={`absolute inset-0 rounded-full transition-all duration-300 ease-out ${
+							{item.label}
+							{/* Underline effect */}
+							<span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 transition-all duration-300 ease-out ${
 								active === item.id 
-									? "bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-blue-400/20 border border-blue-400/30" 
-									: hoveredIndex === index
-									? "bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-blue-400/10 border border-blue-400/20"
-									: "bg-transparent"
+									? "opacity-100 scale-x-100" 
+									: "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100"
 							}`} />
 						</button>
 					))}
+					
+					{/* CTA Button */}
+					<button
+						onClick={() => scrollTo("contact")}
+						className="ml-4 px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300 ease-out shadow-sm hover:shadow-md"
+					>
+						Get In Touch
+					</button>
 				</div>
+
+				{/* Mobile Menu Button */}
 				<button 
-					className="md:hidden text-white relative w-6 h-6 flex flex-col justify-center items-center"
+					className="md:hidden text-gray-700 relative w-6 h-6 flex flex-col justify-center items-center"
 					onClick={() => setIsOpen((v) => !v)}
 					aria-label="Toggle menu"
 				>
@@ -114,51 +99,52 @@ export function Navigation() {
 					<div className="w-5 h-4 relative flex flex-col justify-between">
 						{/* Top line */}
 						<span
-							className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 ease-in-out ${
+							className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-300 ease-in-out ${
 								isOpen ? "rotate-45 translate-y-[7px]" : "rotate-0 translate-y-0"
 							}`}
 						/>
 						{/* Middle line */}
 						<span
-							className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 ease-in-out ${
+							className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-300 ease-in-out ${
 								isOpen ? "opacity-0 translate-x-3" : "opacity-100 translate-x-0"
 							}`}
 						/>
 						{/* Bottom line */}
 						<span
-							className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 ease-in-out ${
+							className={`block h-0.5 w-full bg-gray-700 rounded-full transition-all duration-300 ease-in-out ${
 								isOpen ? "-rotate-45 -translate-y-[7px]" : "rotate-0 translate-y-0"
 							}`}
 						/>
 					</div>
 				</button>
 			</div>
-			{isOpen ? (
-				<div className="md:hidden border-t border-white/10 bg-black/90 backdrop-blur-md">
-					<div className="px-4 py-3 flex flex-col gap-1">
+
+			{/* Mobile Menu */}
+			{isOpen && (
+				<div className="md:hidden border-t border-gray-200/50 bg-white/95 backdrop-blur-md">
+					<div className="px-4 py-4 flex flex-col gap-2">
 						{NAV_ITEMS.map((item) => (
 							<button
 								key={item.id}
 								onClick={() => scrollTo(item.id)}
-								className={`relative px-4 py-3 text-left text-sm rounded-full transition-all duration-300 ease-out group ${
+								className={`px-3 py-2 text-left text-sm font-medium transition-colors duration-300 ease-out ${
 									active === item.id 
-										? "text-white" 
-										: "text-white/80 hover:text-white"
+										? "text-blue-600" 
+										: "text-gray-700 hover:text-blue-600"
 								}`}
 							>
-								<span className="relative z-10">{item.label}</span>
-								
-								{/* Mobile gradient background */}
-								<div className={`absolute inset-0 rounded-full transition-all duration-300 ease-out ${
-									active === item.id 
-										? "bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-blue-400/20 border border-blue-400/30" 
-										: "bg-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400/10 group-hover:via-purple-400/10 group-hover:to-blue-400/10"
-								}`} />
+								{item.label}
 							</button>
 						))}
+						<button
+							onClick={() => scrollTo("contact")}
+							className="mt-2 px-4 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300 ease-out"
+						>
+							Get In Touch
+						</button>
 					</div>
 				</div>
-			) : null}
+			)}
 		</nav>
 	);
 }
