@@ -66,18 +66,17 @@ export function Navigation() {
                     </div>
 				</div>
 				<div className="hidden md:flex gap-2 relative" ref={navRef}>
-					{/* Sliding gradient background */}
+					{/* Sliding glow effect */}
 					<div 
-						className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 opacity-20 transition-all duration-500 ease-out"
+						className="absolute rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 transition-all duration-500 ease-out"
 						style={{
 							width: '100px',
 							height: '40px',
-							left: hoveredIndex !== null 
-								? `${hoveredIndex * 100 + hoveredIndex * 8}px` 
-								: `${NAV_ITEMS.findIndex(item => item.id === active) * 100 + NAV_ITEMS.findIndex(item => item.id === active) * 8}px`,
+							left: `${NAV_ITEMS.findIndex(item => item.id === active) * 100 + NAV_ITEMS.findIndex(item => item.id === active) * 8}px`,
 							top: '50%',
 							transform: 'translateY(-50%)',
-							filter: 'blur(1px)',
+							filter: 'blur(8px)',
+							opacity: 0.4,
 						}}
 					/>
 					
@@ -103,11 +102,6 @@ export function Navigation() {
 									? "bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-blue-400/10 border border-blue-400/20"
 									: "bg-transparent"
 							}`} />
-							
-							{/* Glow effect for active */}
-							{active === item.id && (
-								<div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/30 via-purple-400/30 to-blue-400/30 blur-sm" />
-							)}
 						</button>
 					))}
 				</div>
@@ -160,11 +154,6 @@ export function Navigation() {
 										? "bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-blue-400/20 border border-blue-400/30" 
 										: "bg-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400/10 group-hover:via-purple-400/10 group-hover:to-blue-400/10"
 								}`} />
-								
-								{/* Mobile glow effect for active */}
-								{active === item.id && (
-									<div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/30 via-purple-400/30 to-blue-400/30 blur-sm" />
-								)}
 							</button>
 						))}
 					</div>
