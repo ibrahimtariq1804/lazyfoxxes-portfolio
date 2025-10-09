@@ -71,7 +71,9 @@ export function Contact() {
 					<SectionHeading title="Get In Touch" subtitle="Let's build something great together" />
 				</motion.div>
 				{/* Force deployment - Contact layout updated */}
+				{/* Mobile: Form first, Details second | Desktop: Details left, Form right */}
 				<div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 px-2">
+					{/* FORM - Always first on mobile, second on desktop */}
 					<motion.form 
 						initial={{ opacity: 0, y: 30 }} 
 						whileInView={{ opacity: 1, y: 0 }} 
@@ -145,6 +147,7 @@ export function Contact() {
 						</button>
 					</motion.form>
 
+					{/* DETAILS - Always second on mobile, first on desktop */}
 					<motion.div 
 						initial={{ opacity: 0, y: 30 }} 
 						whileInView={{ opacity: 1, y: 0 }} 
