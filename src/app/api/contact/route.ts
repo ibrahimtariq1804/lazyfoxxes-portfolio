@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
-	// Send email using Resend (more reliable on Vercel)
+	// Send email using Resend (more reliable on Vercel) - Updated
 	const { data, error } = await resend.emails.send({
 		from: 'Portfolio Contact Form <onboarding@resend.dev>',
 		to: ['lazyfoxxes@gmail.com'],
