@@ -16,6 +16,23 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "LazyFoxxes",
   description: "Portfolio website of LazyFoxxes - Showcasing creative projects and professional work",
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
+  openGraph: {
+    title: "LazyFoxxes",
+    description: "Portfolio website of LazyFoxxes - Showcasing creative projects and professional work",
+    images: ['/logo.png'],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "LazyFoxxes",
+    description: "Portfolio website of LazyFoxxes - Showcasing creative projects and professional work",
+    images: ['/logo.png'],
+  },
 };
 
 export default function RootLayout({
