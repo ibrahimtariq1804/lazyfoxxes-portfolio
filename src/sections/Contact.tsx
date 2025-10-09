@@ -71,15 +71,39 @@ export function Contact() {
 				<motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-8 sm:mb-12">
 					<SectionHeading title="Get In Touch" subtitle="Let's build something great together" />
 				</motion.div>
-				{/* Form first, Details below on all screen sizes */}
-				<div className="flex flex-col gap-8 sm:gap-10 px-2">
-					{/* FORM - Always first */}
+				{/* Mobile: Form first, Details second | Desktop: Details left, Form right */}
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 px-2">
+					{/* DETAILS - Second on mobile, first on desktop */}
+					<motion.div 
+						initial={{ opacity: 0, y: 30 }} 
+						whileInView={{ opacity: 1, y: 0 }} 
+						transition={{ duration: 0.5 }} 
+						viewport={{ once: true, margin: "-50px" }}
+						className="order-2 lg:order-1"
+					>
+						<h3 className="text-lg sm:text-xl font-semibold mb-5 sm:mb-6">Ready to collaborate? Let&apos;s connect!</h3>
+						<p className="text-white/70 text-sm sm:text-base mb-6 leading-relaxed">
+							We&apos;re always excited to discuss new projects and opportunities. Whether you need a modern web application, a mobile app, or a complete digital solution, our team is here to bring your vision to life.
+						</p>
+						<div className="space-y-4 sm:space-y-5">
+							<div className="flex items-center gap-3"><Mail className="size-4 sm:size-5 text-primary flex-shrink-0" /><span className="text-sm sm:text-base">contact@lazyfoxxes.com</span></div>
+							<div className="flex items-center gap-3"><Phone className="size-4 sm:size-5 text-primary flex-shrink-0" /><span className="text-sm sm:text-base">+92 (300) 123-4567</span></div>
+							<div className="flex items-center gap-3"><MapPin className="size-4 sm:size-5 text-primary flex-shrink-0" /><span className="text-sm sm:text-base">Islamabad, Pakistan</span></div>
+						</div>
+						<div className="flex gap-3 sm:gap-4 mt-5 sm:mt-6">
+							<a href="https://github.com/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Github className="size-4 sm:size-5" /></a>
+							<a href="https://linkedin.com/company/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Linkedin className="size-4 sm:size-5" /></a>
+							<a href="https://twitter.com/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Twitter className="size-4 sm:size-5" /></a>
+						</div>
+					</motion.div>
+
+					{/* FORM - First on mobile, second on desktop */}
 					<motion.form 
 						initial={{ opacity: 0, y: 30 }} 
 						whileInView={{ opacity: 1, y: 0 }} 
 						transition={{ duration: 0.5, delay: 0.1 }} 
 						viewport={{ once: true, margin: "-50px" }} 
-						className="space-y-3 sm:space-y-4"
+						className="space-y-3 sm:space-y-4 order-1 lg:order-2"
 						onSubmit={handleSubmit}
 					>
 						<input 
@@ -146,30 +170,6 @@ export function Contact() {
 							{isSubmitting ? "Sending..." : "Send Message"}
 						</button>
 					</motion.form>
-
-					{/* DETAILS - Always below the form */}
-					<motion.div 
-						initial={{ opacity: 0, y: 30 }} 
-						whileInView={{ opacity: 1, y: 0 }} 
-						transition={{ duration: 0.5 }} 
-						viewport={{ once: true, margin: "-50px" }}
-						className=""
-					>
-						<h3 className="text-lg sm:text-xl font-semibold mb-5 sm:mb-6">Ready to collaborate? Let&apos;s connect!</h3>
-						<p className="text-white/70 text-sm sm:text-base mb-6 leading-relaxed">
-							We&apos;re always excited to discuss new projects and opportunities. Whether you need a modern web application, a mobile app, or a complete digital solution, our team is here to bring your vision to life.
-						</p>
-						<div className="space-y-4 sm:space-y-5">
-							<div className="flex items-center gap-3"><Mail className="size-4 sm:size-5 text-primary flex-shrink-0" /><span className="text-sm sm:text-base">contact@lazyfoxxes.com</span></div>
-							<div className="flex items-center gap-3"><Phone className="size-4 sm:size-5 text-primary flex-shrink-0" /><span className="text-sm sm:text-base">+92 (300) 123-4567</span></div>
-							<div className="flex items-center gap-3"><MapPin className="size-4 sm:size-5 text-primary flex-shrink-0" /><span className="text-sm sm:text-base">Islamabad, Pakistan</span></div>
-						</div>
-						<div className="flex gap-3 sm:gap-4 mt-5 sm:mt-6">
-							<a href="https://github.com/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Github className="size-4 sm:size-5" /></a>
-							<a href="https://linkedin.com/company/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Linkedin className="size-4 sm:size-5" /></a>
-							<a href="https://twitter.com/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Twitter className="size-4 sm:size-5" /></a>
-						</div>
-					</motion.div>
 				</div>
 			</Container>
 		</section>
