@@ -70,6 +70,7 @@ export function Contact() {
 				<motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-8 sm:mb-12">
 					<SectionHeading title="Get In Touch" subtitle="Let's build something great together" />
 				</motion.div>
+				{/* Force deployment - Contact layout updated */}
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 px-2">
 					<motion.form 
 						initial={{ opacity: 0, y: 30 }} 
