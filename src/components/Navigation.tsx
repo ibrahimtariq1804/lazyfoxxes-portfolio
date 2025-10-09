@@ -68,11 +68,23 @@ export function Navigation() {
 						<button
 							key={item.id}
 							onClick={() => scrollTo(item.id)}
-							className={`px-3 py-2 text-sm font-medium transition-colors ${
-								active === item.id ? "text-blue-400" : "text-white/70 hover:text-white"
+							className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ease-in-out group ${
+								active === item.id 
+									? "text-primary" 
+									: "text-white/70 hover:text-white"
 							}`}
 						>
-							{item.label}
+							<span className="relative z-10">{item.label}</span>
+							{/* Hover background effect */}
+							<div className={`absolute inset-0 rounded-lg transition-all duration-300 ease-in-out ${
+								active === item.id 
+									? "bg-primary/10 border border-primary/20" 
+									: "bg-transparent group-hover:bg-white/5 group-hover:border group-hover:border-white/10"
+							}`} />
+							{/* Active indicator */}
+							{active === item.id && (
+								<div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />
+							)}
 						</button>
 					))}
 				</div>
@@ -106,16 +118,22 @@ export function Navigation() {
 			</div>
 			{isOpen ? (
 				<div className="md:hidden border-t border-white/10 bg-black/90 backdrop-blur-md">
-					<div className="px-4 py-3 flex flex-col">
+					<div className="px-4 py-3 flex flex-col gap-1">
 						{NAV_ITEMS.map((item) => (
 							<button
 								key={item.id}
 								onClick={() => scrollTo(item.id)}
-								className={`px-3 py-2 text-left text-sm ${
-									active === item.id ? "text-blue-400" : "text-white/80"
+								className={`relative px-3 py-2 text-left text-sm rounded-lg transition-all duration-300 ease-in-out group ${
+									active === item.id 
+										? "text-primary bg-primary/10 border border-primary/20" 
+										: "text-white/80 hover:text-white hover:bg-white/5"
 								}`}
 							>
-								{item.label}
+								<span className="relative z-10">{item.label}</span>
+								{/* Mobile hover effect */}
+								{!active && (
+									<div className="absolute inset-0 rounded-lg bg-transparent group-hover:bg-white/5 transition-all duration-300 ease-in-out" />
+								)}
 							</button>
 						))}
 					</div>
