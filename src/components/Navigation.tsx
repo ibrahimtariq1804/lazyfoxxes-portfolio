@@ -16,7 +16,9 @@ export function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [active, setActive] = useState("home");
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+	const [glowStyle, setGlowStyle] = useState({ left: 0, width: 0 });
 	const navRef = useRef<HTMLDivElement>(null);
+	const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -34,6 +36,31 @@ export function Navigation() {
 		onScroll(); // Set initial active
 		return () => window.removeEventListener("scroll", onScroll);
 	}, []);
+
+	// Update glow position based on active button's actual position
+	useEffect(() => {
+		const updateGlowPosition = () => {
+			const activeIndex = NAV_ITEMS.findIndex(item => item.id === active);
+			const activeButton = buttonRefs.current[activeIndex];
+			const navContainer = navRef.current;
+
+			if (activeButton && navContainer) {
+				const buttonRect = activeButton.getBoundingClientRect();
+				const containerRect = navContainer.getBoundingClientRect();
+				
+				setGlowStyle({
+					left: buttonRect.left - containerRect.left,
+					width: buttonRect.width,
+				});
+			}
+		};
+
+		updateGlowPosition();
+		
+		// Update on window resize to handle responsive changes
+		window.addEventListener('resize', updateGlowPosition);
+		return () => window.removeEventListener('resize', updateGlowPosition);
+	}, [active]);
 
 	const scrollTo = (id: string) => {
 		const el = document.getElementById(id);
@@ -65,33 +92,34 @@ export function Navigation() {
                         lazyfoxxes
                     </div>
 				</div>
-				<div className="hidden md:flex gap-2 relative" ref={navRef}>
-					{/* Sliding glow effect */}
-					<div 
-						className="absolute rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 transition-all duration-500 ease-out"
-						style={{
-							width: '96px',
-							height: '40px',
-							left: `${NAV_ITEMS.findIndex(item => item.id === active) * 90 + 1}px`,
-							top: '50%',
-							transform: 'translateY(-50%)',
-							filter: 'blur(6px)',
-							opacity: 0.8,
-						}}
-					/>
+			<div className="hidden md:flex gap-2 relative" ref={navRef}>
+				{/* Sliding glow effect */}
+				<div 
+					className="absolute rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 transition-all duration-500 ease-out"
+					style={{
+						width: `${glowStyle.width}px`,
+						height: '40px',
+						left: `${glowStyle.left}px`,
+						top: '50%',
+						transform: 'translateY(-50%)',
+						filter: 'blur(6px)',
+						opacity: glowStyle.width > 0 ? 0.8 : 0,
+					}}
+				/>
 					
-					{NAV_ITEMS.map((item, index) => (
-						<button
-							key={item.id}
-							onClick={() => scrollTo(item.id)}
-							onMouseEnter={() => setHoveredIndex(index)}
-							onMouseLeave={() => setHoveredIndex(null)}
-							className={`relative px-6 py-2 text-sm font-medium transition-all duration-300 ease-out group ${
-								active === item.id 
-									? "text-white" 
-									: "text-white/70 hover:text-white"
-							}`}
-						>
+				{NAV_ITEMS.map((item, index) => (
+					<button
+						key={item.id}
+						ref={(el) => { buttonRefs.current[index] = el; }}
+						onClick={() => scrollTo(item.id)}
+						onMouseEnter={() => setHoveredIndex(index)}
+						onMouseLeave={() => setHoveredIndex(null)}
+						className={`relative px-6 py-2 text-sm font-medium transition-all duration-300 ease-out group ${
+							active === item.id 
+								? "text-white" 
+								: "text-white/70 hover:text-white"
+						}`}
+					>
 							<span className="relative z-10">{item.label}</span>
 							
 							{/* Individual button background */}
