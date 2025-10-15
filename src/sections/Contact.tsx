@@ -90,11 +90,11 @@ export function Contact() {
 						<div className="flex items-center gap-3"><Phone className="size-4 sm:size-5 text-primary flex-shrink-0" /><span className="text-sm sm:text-base">+92 (300) 123-4567</span></div>
 						<div className="flex items-center gap-3"><MapPin className="size-4 sm:size-5 text-primary flex-shrink-0" /><span className="text-sm sm:text-base">Islamabad, Pakistan</span></div>
 					</div>
-						<div className="flex gap-3 sm:gap-4 mt-5 sm:mt-6">
-							<a href="https://github.com/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Github className="size-4 sm:size-5" /></a>
-							<a href="https://linkedin.com/company/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Linkedin className="size-4 sm:size-5" /></a>
-							<a href="https://twitter.com/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Twitter className="size-4 sm:size-5" /></a>
-						</div>
+					<div className="flex gap-3 sm:gap-4 mt-5 sm:mt-6">
+						<a href="https://github.com/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Github className="size-4 sm:size-5" /></a>
+						<a href="https://www.linkedin.com/in/lazyfoxxes-softech-15172238a/" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Linkedin className="size-4 sm:size-5" /></a>
+						<a href="https://twitter.com/lazyfoxxes" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 border border-border hover:border-primary/50 rounded-lg transition-colors"><Twitter className="size-4 sm:size-5" /></a>
+					</div>
 					</motion.div>
 
 					{/* FORM - First on mobile, second on desktop */}
