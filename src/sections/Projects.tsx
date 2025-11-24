@@ -238,7 +238,7 @@ function ProjectDetailCard({
         <Dialog
             open={true}
             onClose={onClose}
-            className="fixed inset-0 z-[100] flex items-center justify-center"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
         >
             <motion.div
                 initial={{ opacity: 0 }}
@@ -253,60 +253,62 @@ function ProjectDetailCard({
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96, y: 40 }}
                 transition={{ duration: 0.5 }}
-                className="relative z-[101] w-full max-w-4xl mx-auto bg-gradient-to-br from-white/10 via-black/60 to-black/90 border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col"
-                style={{ height: "38rem", maxHeight: "90vh" }}
+                className="relative z-[101] w-full max-w-4xl mx-auto bg-gradient-to-br from-white/10 via-black/60 to-black/90 border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] md:max-h-[85vh]"
             >
+                {/* Close button - repositioned for mobile */}
                 <button
                     onClick={onClose}
-                    className="absolute top-6 right-6 text-white bg-black/40 rounded-full p-3 hover:bg-black/70 transition flex items-center justify-center"
+                    className="absolute top-3 right-3 md:top-6 md:right-6 z-20 text-white bg-black/60 rounded-full p-2 md:p-3 hover:bg-black/80 transition flex items-center justify-center"
                     aria-label="Close"
                 >
-                    <X className="w-6 h-6" />
+                    <X className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
-                <div className="flex flex-col md:flex-row h-full">
-                    <div className="w-full md:w-1/2 flex-shrink-0 flex items-center justify-center bg-black/30">
+                
+                {/* Mobile: Vertical scroll layout | Desktop: Side-by-side */}
+                <div className="flex flex-col md:flex-row h-full overflow-hidden">
+                    {/* Image Section - Fixed height on mobile */}
+                    <div className="w-full md:w-1/2 flex-shrink-0 bg-black/30 h-40 sm:h-48 md:h-auto">
                         <img
                             src={project.image}
                             alt={project.title}
-                            className="w-full h-full object-cover md:rounded-l-3xl"
-                            style={{ maxHeight: "38rem", minHeight: "16rem" }}
+                            className="w-full h-full object-cover"
                         />
                     </div>
-                    <motion.div
-                        drag="y"
-                        dragConstraints={{ top: -200, bottom: 0 }}
-                        className="w-full md:w-1/2 overflow-y-auto h-full p-8 flex flex-col justify-center cursor-grab active:cursor-grabbing"
-                        style={{ touchAction: "none", maxHeight: "38rem", wordBreak: "break-word", whiteSpace: "normal" }}
+                    
+                    {/* Content Section - Scrollable */}
+                    <div
+                        className="w-full md:w-1/2 overflow-y-auto flex-1 p-5 sm:p-6 md:p-8"
+                        style={{ wordBreak: "break-word", whiteSpace: "normal" }}
                     >
-                        <h2 className="text-2xl font-bold text-white mb-3">{project.title}</h2>
-                        <p className="text-white/80 text-base mb-4">{project.description}</p>
-                        <div className="flex flex-wrap gap-3 mb-4">
+                        <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">{project.title}</h2>
+                        <p className="text-white/80 text-sm sm:text-base mb-3 sm:mb-4">{project.description}</p>
+                        <div className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4">
                             {project.tags.map((tag: string, tagIndex: number) => (
                                 <span
                                     key={tagIndex}
-                                    className="px-4 py-1 bg-white/10 border border-white/20 rounded-full text-sm text-white/80 break-words"
+                                    className="px-3 sm:px-4 py-1 bg-white/10 border border-white/20 rounded-full text-xs sm:text-sm text-white/80"
                                 >
                                     {tag}
                                 </span>
                             ))}
                         </div>
-                        <div className="mb-5">
-                            <span className="block text-white font-semibold mb-1">Demo Details:</span>
-                            <p className="text-white/70 text-sm break-words">
+                        <div className="mb-4 sm:mb-5">
+                            <span className="block text-white font-semibold mb-1 text-sm sm:text-base">Demo Details:</span>
+                            <p className="text-white/70 text-xs sm:text-sm leading-relaxed">
                                 {demoDetails[project.title] || "Demo details not available."}
                             </p>
                         </div>
-                        <div className="flex gap-4 mt-auto flex-wrap">
+                        <div className="flex gap-3 sm:gap-4 flex-wrap pb-2">
                             <a
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center w-12 h-12 bg-white/10 border border-white/20 rounded-full text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/10 border border-white/20 rounded-full text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                             >
-                                <Github className="w-6 h-6" />
+                                <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                             </a>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </motion.div>
         </Dialog>
