@@ -84,7 +84,9 @@ export function About() {
 					}}
 					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 max-w-5xl mx-auto px-2"
 				>
-					{WHY_CHOOSE_US.map((point, idx) => (
+					{WHY_CHOOSE_US.map((point, idx) => {
+						const Icon = point.icon;
+						return (
 						<motion.div
 							key={point.title}
 							variants={{
@@ -112,7 +114,7 @@ export function About() {
 								transition={{ delay: idx * 0.15 + 0.3, type: "spring", stiffness: 200 }}
 								className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 mb-2 sm:mb-3"
 							>
-								<point.icon className="w-6 h-6 text-primary" />
+								<Icon className="w-6 h-6 text-primary" />
 							</motion.div>
 							<motion.div 
 								initial={{ opacity: 0, y: 10 }}
@@ -131,7 +133,8 @@ export function About() {
 								{point.description}
 							</motion.div>
 						</motion.div>
-					))}
+						);
+					})}
 				</motion.div>
 			</Container>
 		</section>

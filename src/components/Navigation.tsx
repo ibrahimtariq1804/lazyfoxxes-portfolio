@@ -3,12 +3,12 @@ import { useEffect, useState, useRef } from "react";
 
 const NAV_ITEMS = [
 	{ id: "home", label: "Home" },
-	{ id: "about", label: "About" },
 	{ id: "services", label: "Services" },
 	{ id: "skills", label: "Skills" },
 	{ id: "why-choose-us", label: "Why Us" },
 	{ id: "projects", label: "Projects" },
 	{ id: "reviews", label: "Reviews" },
+	{ id: "faq", label: "FAQ" },
 	{ id: "contact", label: "Contact" },
 ];
 

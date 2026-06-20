@@ -91,11 +91,3 @@ export function Skills() {
 		</section>
 	);
 }
-
-// Inside IconSlider.tsx
-<motion.div
-  animate={{ x: [0, -1000] }}
-  transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
->
-  {/* ...icons... */}
-</motion.div>

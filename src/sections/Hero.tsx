@@ -32,7 +32,7 @@ export function Hero() {
 					initial={{ opacity: 0, y: 50 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
-					className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-7 leading-tight"
+					className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-7 leading-tight text-white"
 				>
 					 We&apos;re <span className="relative inline-block">
 						<span className="relative z-10 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
@@ -44,10 +44,18 @@ export function Hero() {
 				<motion.p
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, delay: 0.2 }}
-					className="text-base sm:text-lg md:text-2xl text-foreground/70 mb-6 sm:mb-8 px-2"
+					transition={{ duration: 0.8, delay: 0.15 }}
+					className="text-base sm:text-lg md:text-xl text-blue-300/90 mb-4 sm:mb-5 px-2"
 				>
 					Redefining Productivity the Foxx Way.
+				</motion.p>
+				<motion.p
+					initial={{ opacity: 0, y: 30 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.8, delay: 0.2 }}
+					className="text-sm sm:text-base md:text-lg text-white/75 mb-6 sm:mb-8 px-2 max-w-2xl mx-auto leading-relaxed"
+				>
+					LazyFoxxes is a digital agency that builds modern web applications, mobile solutions, and SEO-driven digital experiences for businesses ready to grow online. We combine clean code, thoughtful design, and emerging AI search optimization to help your brand get discovered on Google and in AI-powered assistants like ChatGPT and Perplexity. From landing pages to full-stack platforms, we deliver fast, scalable products tailored to your goals—with lasting impact on visibility, performance, and user experience. Great software should work hard so you don&apos;t have to. That&apos;s the Foxx way.
 				</motion.p>
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
