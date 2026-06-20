@@ -1,0 +1,66 @@
+# Allow all crawlers and bots for better indexing
+User-agent: *
+Allow: /
+Allow: /services/*
+Allow: /api/
+
+# Disallow private/admin paths (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Crawl delay (in seconds) - allow aggressive crawling
+Crawl-delay: 0
+
+# Request rate in requests per second
+Request-rate: 10/1s
+
+# Specific rules for search engine bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 0
+
+# AI crawler rules
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://lazyfoxxes-portfolio.vercel.app/sitemap.xml
