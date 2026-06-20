@@ -53,17 +53,11 @@ export function Hero() {
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, delay: 0.4 }}
-					className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center px-4 sm:px-0"
+					className="flex justify-center px-4 sm:px-0"
 				>
 					<button
-						onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-						className="px-6 sm:px-8 py-3 bg-primary hover:opacity-90 text-primary-foreground rounded-lg font-medium transition-colors text-sm sm:text-base"
-					>
-						View Our Work
-					</button>
-					<button
 						onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-						className="px-6 sm:px-8 py-3 border border-border hover:border-foreground/40 rounded-lg font-medium transition-colors text-sm sm:text-base"
+						className="px-6 sm:px-8 py-3 bg-primary hover:opacity-90 text-primary-foreground rounded-lg font-medium transition-colors text-sm sm:text-base"
 					>
 						Get In Touch
 					</button>

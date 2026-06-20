@@ -46,7 +46,7 @@ const PROJECTS = [
     {
         title: "Portfolio Website",
         description:
-            "A stunning, responsive portfolio website showcasing our team's work with smooth animations, interactive elements, and modern design. Built for performance and SEO optimization to make a lasting impression.",
+            "A stunning, responsive portfolio website showcasing our work with smooth animations, interactive elements, and modern design. Built for performance and SEO optimization to make a lasting impression.",
         image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&h=800&fit=crop",
         tags: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
         github: "#",

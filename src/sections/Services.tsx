@@ -2,13 +2,26 @@
 import { useEffect, useRef, useState } from "react";
 import { Container, SectionHeading } from "@/components";
 import { motion } from "framer-motion";
+import {
+	Globe,
+	Smartphone,
+	Palette,
+	Settings,
+	Bot,
+	type LucideIcon,
+} from "lucide-react";
 
-const SERVICES = [
+const SERVICES: {
+	title: string;
+	description: string;
+	icon: LucideIcon;
+	details: string[];
+}[] = [
 	{
 		title: "Web Development",
 		description:
 			"We create high-performance, scalable web applications using cutting-edge technologies. From simple landing pages to complex enterprise solutions, we deliver responsive, SEO-optimized websites that provide exceptional user experiences and drive business growth.",
-		icon: "🌐",
+		icon: Globe,
 		details: [
 			"Frontend: React, Next.js, TypeScript, Tailwind CSS, Framer Motion",
 			"Backend: Node.js, Express, RESTful APIs, GraphQL",
@@ -21,7 +34,7 @@ const SERVICES = [
 		title: "Mobile Development",
 		description:
 			"We build native and cross-platform mobile applications that deliver seamless experiences across iOS and Android. Our mobile solutions combine beautiful design with robust functionality, ensuring your app performs flawlessly on any device.",
-		icon: "📱",
+		icon: Smartphone,
 		details: [
 			"Frameworks: React Native, Flutter, Kotlin",
 			"State Management: Redux, Zustand, Context API",
@@ -34,7 +47,7 @@ const SERVICES = [
 		title: "UI/UX Design",
 		description:
 			"We craft beautiful, intuitive interfaces that users love. Our design process focuses on understanding your users' needs and creating experiences that are not only visually stunning but also highly functional and accessible to everyone.",
-		icon: "🎨",
+		icon: Palette,
 		details: [
 			"Design Tools: Figma, Adobe XD, Sketch",
 			"Design Systems & Component Libraries",
@@ -47,7 +60,7 @@ const SERVICES = [
 		title: "Backend Development",
 		description:
 			"We architect and build robust, scalable backend systems that power your applications. From API development to database design and cloud infrastructure, we ensure your backend is secure, performant, and ready to scale with your business.",
-		icon: "⚙️",
+		icon: Settings,
 		details: [
 			"Languages: Node.js, Python, Java",
 			"Databases: PostgreSQL, MongoDB, MySQL, Firebase",
@@ -56,7 +69,28 @@ const SERVICES = [
 			"DevOps: Docker, Kubernetes, CI/CD pipelines",
 		],
 	},
+	{
+		title: "AI Search Optimization",
+		description:
+			"We optimize your digital presence for AI-powered search engines and answer engines like ChatGPT, Perplexity, and Google AI Overviews. Our strategies ensure your brand is discoverable, accurately represented, and recommended when users ask AI assistants for solutions in your industry.",
+		icon: Bot,
+		details: [
+			"AI Visibility Audits & Brand Entity Optimization",
+			"Structured Data & Schema Markup for AI Crawlers",
+			"Content Strategy for LLM-Friendly Discovery",
+			"Monitoring AI Search Mentions & Citations",
+			"Optimization for ChatGPT, Perplexity & Google AI Overviews",
+		],
+	},
 ];
+
+function ServiceIcon({ icon: Icon }: { icon: LucideIcon }) {
+	return (
+		<div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
+			<Icon className="w-5 h-5 text-primary" />
+		</div>
+	);
+}
 
 export function Services() {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -119,9 +153,8 @@ export function Services() {
 									initial={{ scale: 0, rotate: -180 }}
 									whileInView={{ scale: 1, rotate: 0 }}
 									transition={{ delay: i * 0.15 + 0.2, type: "spring", stiffness: 200 }}
-									className="text-3xl"
 								>
-									{svc.icon}
+									<ServiceIcon icon={svc.icon} />
 								</motion.div>
 								<motion.h3 
 									initial={{ opacity: 0, x: -20 }}
@@ -188,7 +221,7 @@ export function Services() {
 								onClick={() => document.getElementById(`service-detail-${i}`)?.scrollIntoView({ behavior: "smooth", block: "center" })}
 							>
 								<div className="flex items-center gap-4">
-									<div className="text-3xl">{svc.icon}</div>
+									<ServiceIcon icon={svc.icon} />
 									<h3 className={`text-lg font-semibold ${active === i ? "text-primary" : ""}`}>{svc.title}</h3>
 								</div>
 								{active === i ? (
@@ -213,7 +246,9 @@ export function Services() {
 							>
 								<div className="backdrop-blur-sm border rounded-xl p-8">
 									<div className="flex items-center gap-4 mb-4">
-										<div className="text-4xl">{svc.icon}</div>
+										<div className="scale-125">
+											<ServiceIcon icon={svc.icon} />
+										</div>
 										<h3 className="text-2xl font-bold">{svc.title}</h3>
 									</div>
 									<p className="text-foreground/80 mb-6 leading-relaxed">{svc.description}</p>

@@ -1,35 +1,60 @@
 "use client";
 import { Container, SectionHeading, Squares } from "@/components";
 import { motion } from "framer-motion";
+import {
+	Zap,
+	Rocket,
+	Code2,
+	Layout,
+	Search,
+	Bot,
+	type LucideIcon,
+} from "lucide-react";
 
-const WHY_CHOOSE_US = [
+const WHY_CHOOSE_US: {
+	title: string;
+	description: string;
+	icon: LucideIcon;
+}[] = [
 	{
 		title: "Modern Tech Stacks",
 		description:
 			"We use Next.js, TypeScript, and Tailwind CSS for fast, scalable, and maintainable web apps.",
-		icon: "⚡",
+		icon: Zap,
 	},
 	{
 		title: "Performance Focused",
 		description: "Optimized for speed and SEO, your site loads fast and ranks higher.",
-		icon: "🚀",
+		icon: Rocket,
 	},
 	{
 		title: "Clean Code",
 		description: "Readable, maintainable code with best practices and robust testing.",
-		icon: "🧹",
+		icon: Code2,
 	},
 	{
 		title: "Delightful UX",
 		description:
 			"Animations, accessibility, and responsive design for a great user experience.",
-		icon: "🎨",
+		icon: Layout,
+	},
+	{
+		title: "Search Engine Optimization",
+		description:
+			"We improve your visibility on Google and other search engines through technical SEO, keyword strategy, and content optimization that drives organic traffic.",
+		icon: Search,
+	},
+	{
+		title: "AI Search Optimization",
+		description:
+			"We position your brand to be discovered and recommended by AI assistants like ChatGPT and Perplexity through structured content and entity optimization.",
+		icon: Bot,
 	},
 ];
 
 export function About() {
 	return (
-		<section id="about" className="relative py-12 sm:py-16 md:py-20 bg-black overflow-hidden">
+		<section id="why-choose-us" className="relative py-12 sm:py-16 md:py-20 bg-black overflow-hidden">
 			<div className="absolute inset-0 -z-10 w-full h-full pointer-events-none">
 				<Squares
 					direction="diagonal"
@@ -47,21 +72,7 @@ export function About() {
 					viewport={{ once: true }}
 					className="text-center mb-8 sm:mb-12"
 				>
-					<SectionHeading title="About" subtitle="Who we are and what we do" />
-				</motion.div>
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, delay: 0.2 }}
-					viewport={{ once: true }}
-					className="max-w-2xl mx-auto mb-8 sm:mb-10 px-4"
-				>
-					<p className="text-white/80 text-base sm:text-lg text-center leading-relaxed">
-						We are a team of three passionate developers who build modern, scalable web and mobile applications. 
-						<br className="hidden sm:block" />
-						<span className="sm:hidden"> </span>
-						With expertise in Next.js, TypeScript, React Native, and cloud technologies, we deliver high-quality solutions that combine clean code, exceptional performance, and delightful user experiences.
-					</p>
+					<SectionHeading title="Why Choose Us" subtitle="What sets LazyFoxxes apart" />
 				</motion.div>
 				<motion.div
 					initial="hidden"
@@ -71,7 +82,7 @@ export function About() {
 						hidden: {},
 						visible: { transition: { staggerChildren: 0.15 } },
 					}}
-					className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 max-w-3xl mx-auto px-2"
+					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 max-w-5xl mx-auto px-2"
 				>
 					{WHY_CHOOSE_US.map((point, idx) => (
 						<motion.div
@@ -99,9 +110,9 @@ export function About() {
 								initial={{ scale: 0, rotate: -180 }}
 								whileInView={{ scale: 1, rotate: 0 }}
 								transition={{ delay: idx * 0.15 + 0.3, type: "spring", stiffness: 200 }}
-								className="text-3xl sm:text-4xl mb-2 sm:mb-3"
+								className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 mb-2 sm:mb-3"
 							>
-								{point.icon}
+								<point.icon className="w-6 h-6 text-primary" />
 							</motion.div>
 							<motion.div 
 								initial={{ opacity: 0, y: 10 }}
