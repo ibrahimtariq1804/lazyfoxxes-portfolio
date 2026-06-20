@@ -25,4 +25,6 @@ export interface Project {
   tags: string[]
   github: string
   demo: string
+  liveUrl?: string
+  maintenanceNote?: string
 }
