@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const WHY_CHOOSE_US = [
 	{
-		title: "Modern Tech Stack",
+		title: "Modern Tech Stacks",
 		description:
 			"We use Next.js, TypeScript, and Tailwind CSS for fast, scalable, and maintainable web apps.",
 		icon: "⚡",
