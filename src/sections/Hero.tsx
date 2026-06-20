@@ -1,15 +1,24 @@
 "use client";
+import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { LightRays } from "@/components";
 
 export function Hero() {
+	const [isMobile, setIsMobile] = useState(false);
 	const { scrollY } = useScroll();
 	const y = useTransform(scrollY, [0, 500], [0, -80]);
+
+	useEffect(() => {
+		const checkMobile = () => setIsMobile(window.innerWidth < 640);
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
 
 	return (
 		<section
 			id="home"
-			className="relative -mt-[4.5rem] min-h-dvh flex flex-col items-center justify-start sm:justify-center overflow-hidden bg-black px-4 sm:px-6 pt-[5.5rem] sm:pt-[6rem] pb-10 sm:pb-14"
+			className="relative -mt-[4.5rem] min-h-dvh flex flex-col items-center justify-center overflow-hidden bg-black px-5 sm:px-6 pt-[4.75rem] pb-10 sm:pt-[6rem] sm:pb-14"
 		>
 			<div className="absolute inset-0 pointer-events-none">
 				<LightRays
@@ -21,7 +30,7 @@ export function Hero() {
 					pulsating={true}
 					fadeDistance={1.2}
 					saturation={1.2}
-					followMouse={true}
+					followMouse={!isMobile}
 					mouseInfluence={0.15}
 					noiseAmount={0.1}
 					distortion={0.2}
@@ -31,17 +40,17 @@ export function Hero() {
 			</div>
 
 			<motion.div
-				style={{ y }}
-				className="relative z-10 w-full max-w-3xl mx-auto text-center flex flex-col items-center gap-3 sm:gap-4"
+				style={isMobile ? undefined : { y }}
+				className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center justify-center text-center gap-3.5 sm:gap-4"
 			>
 				<motion.h1
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
-					className="text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white"
+					className="flex flex-col items-center sm:block text-[2.25rem] leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white w-full"
 				>
-					<span className="block sm:inline">We&apos;re </span>
-					<span className="relative inline-block mt-1 sm:mt-0">
+					<span className="block sm:inline">We&apos;re</span>
+					<span className="relative inline-block mt-0.5 sm:mt-0 sm:ml-2">
 						<span className="relative z-10 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
 							Lazyfoxxes
 						</span>
@@ -53,7 +62,7 @@ export function Hero() {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, delay: 0.15 }}
-					className="text-sm sm:text-base md:text-lg text-blue-300/90 font-medium max-w-md sm:max-w-none"
+					className="w-full text-sm sm:text-base md:text-lg text-blue-300/90 font-medium px-1"
 				>
 					Redefining Productivity the Foxx Way.
 				</motion.p>
@@ -62,7 +71,7 @@ export function Hero() {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, delay: 0.25 }}
-					className="text-xs sm:text-sm md:text-base text-white/70 leading-relaxed max-w-xl mx-auto text-pretty"
+					className="w-full text-[0.8125rem] sm:text-sm md:text-base text-white/70 leading-relaxed px-1 sm:px-0 max-w-xl text-pretty"
 				>
 					LazyFoxxes is a digital agency that builds modern web applications, mobile solutions, and SEO-driven digital experiences for businesses ready to grow online. We combine clean code, thoughtful design, and emerging AI search optimization to help your brand get discovered on Google and in AI-powered assistants like ChatGPT and Perplexity. From landing pages to full-stack platforms, we deliver fast, scalable products tailored to your goals—with lasting impact on visibility, performance, and user experience. Great software should work hard so you don&apos;t have to. That&apos;s the Foxx way.
 				</motion.p>
@@ -71,7 +80,7 @@ export function Hero() {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, delay: 0.35 }}
-					className="pt-1 sm:pt-2"
+					className="w-full flex justify-center pt-1 sm:pt-2"
 				>
 					<button
 						onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
