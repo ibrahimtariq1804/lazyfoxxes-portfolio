@@ -1,15 +1,15 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Container, SectionHeading } from "@/components";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { SERVICES } from "@/lib/services";
 import { SERVICE_ICONS } from "@/lib/service-icons";
+import type { ServiceIconName } from "@/lib/services";
 
-function ServiceIcon({ slug }: { slug: string }) {
-	const service = SERVICES.find((s) => s.slug === slug);
-	if (!service) return null;
-	const Icon = SERVICE_ICONS[service.icon];
+function ServiceIcon({ iconName }: { iconName: ServiceIconName }) {
+	const Icon = SERVICE_ICONS[iconName];
 	return (
 		<div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
 			<Icon className="w-5 h-5 text-primary" />
@@ -18,6 +18,26 @@ function ServiceIcon({ slug }: { slug: string }) {
 }
 
 export function Services() {
+	const containerRef = useRef<HTMLDivElement>(null);
+	const [active, setActive] = useState(0);
+
+	useEffect(() => {
+		const onScroll = () => {
+			const nodes = SERVICES.map((_, i) => document.getElementById(`service-detail-${i}`));
+			const y = window.scrollY;
+			const h = window.innerHeight;
+			nodes.forEach((el, i) => {
+				if (!el) return;
+				const rect = el.getBoundingClientRect();
+				const center = rect.top + window.scrollY + rect.height / 2;
+				const viewportCenter = y + h / 2;
+				if (Math.abs(center - viewportCenter) < rect.height / 2) setActive(i);
+			});
+		};
+		window.addEventListener("scroll", onScroll, { passive: true });
+		return () => window.removeEventListener("scroll", onScroll);
+	}, []);
+
 	return (
 		<section id="services" className="bg-black transition-colors duration-500 py-12 sm:py-16 md:py-20">
 			<Container>
@@ -31,7 +51,8 @@ export function Services() {
 					<SectionHeading title="Our Services" subtitle="How we can help you succeed" />
 				</motion.div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+				{/* Mobile View */}
+				<div className="lg:hidden space-y-6 pb-8">
 					{SERVICES.map((svc, i) => (
 						<motion.div
 							key={svc.slug}
@@ -39,47 +60,170 @@ export function Services() {
 							whileInView={{ opacity: 1, y: 0, scale: 1 }}
 							transition={{
 								duration: 0.5,
-								delay: i * 0.1,
+								delay: i * 0.15,
 								type: "spring",
 								stiffness: 100,
 							}}
 							viewport={{ once: true, margin: "-50px" }}
 							whileHover={{
-								y: -4,
+								scale: 1.02,
 								borderColor: "rgba(96, 165, 250, 0.4)",
-								boxShadow: "0 10px 40px rgba(96, 165, 250, 0.12)",
+								boxShadow: "0 10px 40px rgba(96, 165, 250, 0.15)",
 							}}
-							className="group backdrop-blur-sm border border-border rounded-xl p-5 sm:p-6 transition-all flex flex-col h-full"
+							whileTap={{ scale: 0.98 }}
+							className="backdrop-blur-sm border border-border rounded-xl p-5 transition-all"
 						>
 							<div className="flex items-center gap-3 mb-3">
-								<ServiceIcon slug={svc.slug} />
-								<h3 className="text-lg font-bold text-white">{svc.title}</h3>
+								<motion.div
+									initial={{ scale: 0, rotate: -180 }}
+									whileInView={{ scale: 1, rotate: 0 }}
+									transition={{ delay: i * 0.15 + 0.2, type: "spring", stiffness: 200 }}
+								>
+									<ServiceIcon iconName={svc.icon} />
+								</motion.div>
+								<motion.h3
+									initial={{ opacity: 0, x: -20 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									transition={{ delay: i * 0.15 + 0.3 }}
+									className="text-lg font-bold"
+								>
+									{svc.title}
+								</motion.h3>
 							</div>
-
-							<p className="text-foreground/70 text-sm mb-4 leading-relaxed flex-1">
+							<motion.p
+								initial={{ opacity: 0 }}
+								whileInView={{ opacity: 1 }}
+								transition={{ delay: i * 0.15 + 0.4 }}
+								className="text-foreground/70 text-sm mb-4 leading-relaxed"
+							>
 								{svc.description}
-							</p>
-
-							<div className="flex flex-wrap gap-2 mb-5">
-								{svc.details.slice(0, 3).map((d) => (
-									<span
-										key={d}
-										className="text-xs px-2 py-1 rounded-md bg-primary/10 border border-primary/20 text-foreground/70"
-									>
-										{d.split(":")[0]}
-									</span>
-								))}
+							</motion.p>
+							<div className="space-y-2 mb-5">
+								<motion.h4
+									initial={{ opacity: 0, x: -10 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									transition={{ delay: i * 0.15 + 0.5 }}
+									className="text-xs font-semibold text-primary/80 uppercase tracking-wide"
+								>
+									Tech Stack
+								</motion.h4>
+								<div className="flex flex-wrap gap-2">
+									{svc.details.map((d, di) => (
+										<motion.span
+											key={di}
+											initial={{ opacity: 0, scale: 0.8, y: 10 }}
+											whileInView={{ opacity: 1, scale: 1, y: 0 }}
+											transition={{
+												delay: i * 0.15 + 0.6 + di * 0.05,
+												type: "spring",
+												stiffness: 200,
+											}}
+											whileHover={{ scale: 1.1, y: -2 }}
+											className="text-xs px-2 py-1 rounded-md bg-primary/10 border border-primary/20 text-foreground/80 hover:bg-primary/20 hover:border-primary/40 transition-colors"
+										>
+											{d}
+										</motion.span>
+									))}
+								</div>
 							</div>
-
 							<Link
 								href={`/services/${svc.slug}`}
-								className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors group-hover:gap-3"
+								className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
 							>
 								Learn More
-								<ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+								<ArrowRight className="w-4 h-4" />
 							</Link>
 						</motion.div>
 					))}
+				</div>
+
+				{/* Desktop View: Sticky sidebar + scroll-synced details */}
+				<div ref={containerRef} className="hidden lg:grid lg:grid-cols-2 gap-10 pb-10">
+					<div className="lg:sticky lg:top-24 lg:self-start space-y-6">
+						{SERVICES.map((svc, i) => (
+							<motion.div
+								key={svc.slug}
+								initial={{ opacity: 0, x: -40 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								transition={{ duration: 0.5, delay: i * 0.05 }}
+								viewport={{ once: true }}
+								className={`backdrop-blur-sm border rounded-xl p-6 transition-all cursor-pointer ${
+									active === i
+										? "border-primary/60 bg-primary/5"
+										: "border-border hover:border-foreground/30"
+								}`}
+								onClick={() =>
+									document.getElementById(`service-detail-${i}`)?.scrollIntoView({
+										behavior: "smooth",
+										block: "center",
+									})
+								}
+							>
+								<div className="flex items-center gap-4">
+									<ServiceIcon iconName={svc.icon} />
+									<h3 className={`text-lg font-semibold ${active === i ? "text-primary" : ""}`}>
+										{svc.title}
+									</h3>
+								</div>
+								{active === i ? (
+									<motion.p
+										initial={{ height: 0, opacity: 0 }}
+										animate={{ height: "auto", opacity: 1 }}
+										className="mt-3 text-sm text-foreground/70"
+									>
+										{svc.description.slice(0, 120)}...
+									</motion.p>
+								) : null}
+							</motion.div>
+						))}
+					</div>
+
+					<div className="space-y-32">
+						{SERVICES.map((svc, i) => (
+							<motion.div
+								key={svc.slug}
+								id={`service-detail-${i}`}
+								initial={{ opacity: 0, y: 80 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.6 }}
+								viewport={{ once: true, margin: "-10%" }}
+								className="min-h-[80vh] flex flex-col justify-center"
+							>
+								<div className="backdrop-blur-sm border rounded-xl p-8">
+									<div className="flex items-center gap-4 mb-4">
+										<div className="scale-125">
+											<ServiceIcon iconName={svc.icon} />
+										</div>
+										<h3 className="text-2xl font-bold">{svc.title}</h3>
+									</div>
+									<p className="text-foreground/80 mb-6 leading-relaxed">{svc.description}</p>
+									<h4 className="text-base font-semibold mb-3">Technologies & Tools</h4>
+									<div className="grid gap-3 mb-6">
+										{svc.details.map((d, di) => (
+											<motion.div
+												key={di}
+												initial={{ opacity: 0, x: -20 }}
+												whileInView={{ opacity: 1, x: 0 }}
+												transition={{ duration: 0.4, delay: di * 0.05 }}
+												viewport={{ once: true }}
+												className="flex items-center gap-3 p-4 rounded-lg border hover:border-primary/40 transition-colors"
+											>
+												<div className="w-2 h-2 bg-primary rounded-full" />
+												<span className="text-sm">{d}</span>
+											</motion.div>
+										))}
+									</div>
+									<Link
+										href={`/services/${svc.slug}`}
+										className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary/40 bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors"
+									>
+										Learn More
+										<ArrowRight className="w-4 h-4" />
+									</Link>
+								</div>
+							</motion.div>
+						))}
+					</div>
 				</div>
 			</Container>
 		</section>
