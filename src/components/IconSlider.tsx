@@ -1,9 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
 interface IconItem {
   name: string;
-  icon: string;
+  icon: ReactNode;
   category: string;
 }
 
@@ -36,7 +37,7 @@ export function IconSlider({ icons, className = "" }: IconSliderProps) {
             className="flex-shrink-0 flex flex-col items-center gap-3 p-6 group"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="text-4xl group-hover:scale-110 transition-transform">
+            <div className="text-4xl group-hover:scale-110 transition-transform flex items-center justify-center">
               {item.icon}
             </div>
             <span className="text-sm text-white/70 group-hover:text-white transition-colors">
