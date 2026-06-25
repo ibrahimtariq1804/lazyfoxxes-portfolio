@@ -17,17 +17,16 @@ import {
 	SiMysql,
 	SiFlutter,
 	SiKotlin,
-	SiAmazonwebservices,
 	SiVercel,
 	SiNetlify,
 	SiGithubactions,
 	SiGit,
-	SiVisualstudiocode,
 	SiStripe,
 	SiFirebase,
 } from "react-icons/si";
-import { FaJava } from "react-icons/fa";
+import { FaJava, FaAws } from "react-icons/fa";
 import { TbApi } from "react-icons/tb";
+import { VscVscode } from "react-icons/vsc";
 
 
 const SKILLS_ICONS = [
@@ -57,14 +56,14 @@ const SKILLS_ICONS = [
 	{ name: "Kotlin", icon: <SiKotlin size={40} color="#7F52FF" />, category: "Mobile" },
 
 	// Cloud & DevOps
-	{ name: "AWS", icon: <SiAmazonwebservices size={40} color="#FF9900" />, category: "Cloud" },
+	{ name: "AWS", icon: <FaAws size={40} color="#FF9900" />, category: "Cloud" },
 	{ name: "Vercel", icon: <SiVercel size={40} color="#ffffff" />, category: "Cloud" },
 	{ name: "Netlify", icon: <SiNetlify size={40} color="#00C7B7" />, category: "Cloud" },
 	{ name: "GitHub Actions", icon: <SiGithubactions size={40} color="#2088FF" />, category: "DevOps" },
 
 	// Design & Tools
 	{ name: "Git", icon: <SiGit size={40} color="#F05032" />, category: "Tools" },
-	{ name: "VS Code", icon: <SiVisualstudiocode size={40} color="#007ACC" />, category: "Tools" },
+	{ name: "VS Code", icon: <VscVscode size={40} color="#007ACC" />, category: "Tools" },
 
 	// APIs & Integration
 	{ name: "REST API", icon: <TbApi size={40} color="#6EC6CA" />, category: "API" },
